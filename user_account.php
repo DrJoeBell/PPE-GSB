@@ -1,10 +1,9 @@
 <?php 
 session_start();
-include("database_connexion.php");
-include("header.php");
-include("function.php");
-include("navbar.php");
-include("side_navbar.php");
+include("lib/database_connexion.php");
+include("lib/function.php");
+include("partials/navbar.php");
+include("partials/side_navbar.php");
 if  (!isset($_SESSION["login"]))
 {  header ("Location: signin.php")   ;
     break;}
@@ -31,6 +30,7 @@ header ("Location: signin.php")   ;
 
 }
 }
+include("partials/header.php");
 
 ?>
 <div class="container">
@@ -59,4 +59,4 @@ header ("Location: signin.php")   ;
 </form>  
     </div>
 
-<?php include("footer.php");?>
+<?php include("partials/footer.php");?>

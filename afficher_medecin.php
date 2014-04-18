@@ -1,10 +1,10 @@
-<?php
-session_start();
-include("database_connexion.php");
-include("header.php");
-include("function.php");
-include("navbar.php");
-include("side_navbar.php");
+<?php 
+  session_start();
+  include("lib/database_connexion.php");
+  include("partials/header.php");
+  include("lib/function.php");
+  include("partials/navbar.php");
+  include("partials/side_navbar.php");
 
 
 //Si le post est rentré
@@ -135,4 +135,4 @@ if(isset($_GET["id"]))
       }
 
       ?>
-<?php include("footer.php");?>
+<?php include("partials/footer.php");?>
