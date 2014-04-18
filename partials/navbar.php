@@ -1,48 +1,32 @@
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container-fluid">
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="brand" href="#">
-                <?php setlocale (LC_TIME, 'fr_FR.ISO-8859-1','fra');
+<div class="bs-component">
+  <div class="navbar navbar-fixed-top navbar-inverse">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">
+          <?php setlocale (LC_TIME, 'fr_FR.ISO-8859-1','fra');
                 echo (strftime("%A %d %B")); ?>
-            </a>
-            <div class="nav-collapse collapse">
-                <ul class="nav" role="navigation">
-                    <li>
-                        <a href="index.php">
-                            <img src="assets/img/glyphicons_020_home-blanc.png" width="20em"/>
-                            &nbsp;Accueil
-                        </a>
-                    </li>
-                </ul>
-                <ul class="nav pull-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="assets/img/glyphicons_003_user-blanc.png"/>
-                            <?php echo $_SESSION["nom"]." ". $_SESSION["prenom"]?>
-                            <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="user_account.php">
-                                    <img src="assets/img/glyphicons_137_cogwheels.png" width="13em"/>
-                                    &nbsp;Mon compte
-                                </a>
-                            </li>
-                            <li>
-                                <a href="logout.php">
-                                    <img src="assets/img/glyphicons_063_power.png" width="10%"/>
-                                    &nbsp;Déconnexion
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div><!--/.nav-collapse -->
-        </div>
+      </a>
     </div>
+    <div class="navbar-collapse collapse navbar-inverse-collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="index.php">Accueil</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download"><?php echo $_SESSION["nom"]." ". $_SESSION["prenom"]?> <span class="caret"></span></a>
+          <ul class="dropdown-menu" aria-labelledby="download">
+            <li><a href="user_account.php">Modifier les infos</a></li>
+            <li><a href="logout.php">Deconnexion</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
+<br>
+<br>
+<br>
