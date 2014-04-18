@@ -4,8 +4,8 @@ if ((!isset($_SESSION["password"]) )&& (!isset($_SESSION["login"])))
 {  header ("Location: signin.php")   ;
     break;}
     
-include("partials/header.php");
 include("lib/function.php");
+include("partials/header.php");
 include("partials/navbar.php");
 include("lib/database_connexion.php");
 

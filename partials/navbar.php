@@ -12,19 +12,19 @@
     </div>
     <div class="navbar-collapse collapse navbar-inverse-collapse">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="index.php"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Accueil</a></li>
+        <li class="active"><a href="<?= WEBROOT ;?>"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Accueil</a></li>
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">
             <span class="glyphicon glyphicon-file"></span>
             &nbsp;&nbsp;Comptes Rendus&nbsp;&nbsp;<span class="caret"></span>
           </a>
           <ul class="dropdown-menu" aria-labelledby="download">
-            <li><a href="ajouter-compte-rendu.php">
+            <li><a href="<?= WEBROOT ;?>ajouter-compte-rendu.php">
                   <span class="glyphicon glyphicon-plus"></span>
                   Ajouter un compte rendu
                 </a>
             </li>
-            <li><a href="afficher-compte-rendu.php">
+            <li><a href="<?= WEBROOT ;?>afficher_compte_rendu.php?page=1">
                   <span class="glyphicon glyphicon-bookmark"></span>
                   Afficher les comptes rendus
                 </a>
@@ -38,12 +38,12 @@
             &nbsp;&nbsp;Médecins&nbsp;&nbsp;<span class="caret"></span>
           </a>
           <ul class="dropdown-menu" aria-labelledby="download">
-            <li><a href="ajouter-medecin.php">
+            <li><a href="<?= WEBROOT ;?>ajouter-medecin.php">
                   <span class="glyphicon glyphicon-plus"></span>
                   Ajouter un médecin
                 </a>
             </li>
-            <li><a href="afficher-medecin.php">
+            <li><a href="<?= WEBROOT ;?>afficher-medecin.php">
                   <span class="glyphicon glyphicon-bookmark"></span>
                   Afficher les fiches médecins
                 </a>
@@ -60,12 +60,12 @@
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" aria-labelledby="download">
-            <li><a href="user_account.php">
+            <li><a href="<?= WEBROOT ;?>user_account.php">
                   <span class="glyphicon glyphicon-edit"></span>
                   Modifier les informations
                 </a>
             </li>
-            <li><a href="logout.php">
+            <li><a href="<?= WEBROOT ;?>logout.php">
                   <span class="glyphicon glyphicon-off"></span>
                   Deconnexion
                 </a>
@@ -79,10 +79,4 @@
 <br>
 <br>
 <br>
-<<<<<<< HEAD
 <?php flashmessage(); ?>
-=======
-
-
-
->>>>>>> 475f7855ff2d13e9f1ecd8924f4320c099cbde3f
