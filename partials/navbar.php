@@ -57,7 +57,7 @@
           <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">
             <span class="glyphicon glyphicon-user"></span>
             &nbsp;&nbsp;<?php echo $_SESSION["nom"]." ". $_SESSION["prenom"]?>
-            <span class="caret"></span>
+            <span class="caret"></span>&nbsp;&nbsp;
           </a>
           <ul class="dropdown-menu" aria-labelledby="download">
             <li><a href="<?= WEBROOT ;?>user_account.php">
