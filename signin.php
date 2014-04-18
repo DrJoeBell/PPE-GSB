@@ -1,6 +1,7 @@
 <?php 
     session_start();
     include("lib/function.php");
+    include("lib/constants.php");
     include("lib/database_connexion.php");
     if (isset($_POST["login"]) && isset($_POST["password"]))
     {

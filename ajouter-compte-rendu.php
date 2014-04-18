@@ -2,6 +2,7 @@
   session_start();
   include("lib/database_connexion.php");
   include("lib/function.php");
+  include("lib/constants.php");
 
 
   //Si le post est rentré

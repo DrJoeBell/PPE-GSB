@@ -1,39 +1,42 @@
 <?php 
 session_start();
 include("lib/database_connexion.php");
+include("lib/constants.php");
 include("lib/function.php");
-include("partials/navbar.php");
-
 
 if (!isset($_SESSION["login"]))
 {
   header ("Location: signin.php")   ;
-  break;
+  die();
 }
 if (isset($_POST["nom"]))
 {
-  if ($_POST["pass"]!="") #Si le mot de passe est changer
+  if ($_POST["pass"]!="") #Si le mot de passe est modifié
   {
     if ($_POST["pass"]==$_POST["pass2"])
     {
       $query= "UPDATE visiteur SET NOM = '".$_POST["nom"]."' ,PRENOM = '".$_POST["prenom"]."' ,MAIL = '".$_POST["email"]."' ,MDP = '".md5($_POST["pass"])."' where login='".$_SESSION["login"]."' ;";
       $result = $bdd->query($query);
       header ("Location: signin.php");
-    break;
+    die();
   }
     else
     {
       flashMessage("error","Les mots de passe ne correspondent pas");
     }
   }
-  else { #Sinon
+  else { #Sinon est le même
     $query= "UPDATE visiteur SET NOM = '".$_POST["nom"]."' ,PRENOM = '".$_POST["prenom"]."' ,MAIL = '".$_POST["email"]."' where login='".$_SESSION["login"]."' ;";
     $result = $bdd->query($query);
+
+    // setFlash("success","Les modifications ont été enregistrées.");
+
     header ("Location: signin.php");
-    break;
+    die();
   }
 }
 include("partials/header.php");
+include("partials/navbar.php");
 
 ?>
 
@@ -87,6 +90,7 @@ include("partials/header.php");
           <div class="form-group">
             <div class="col-lg-10 col-lg-offset-2">
               <button type="submit" class="btn btn-primary">Enregistrer</button>
+              <a href="<?= WEBROOT;?>"><button type="button" class="btn btn-primary">Retour</button></a>
             </div>
           </div>
 

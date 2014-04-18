@@ -10,6 +10,7 @@ $server="localhost";
 $user="root";
 $password="valentin";
 
+
 try{
 $bdd = new PDO("mysql:host=$server; dbname=$database", $user, $password );
 

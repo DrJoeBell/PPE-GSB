@@ -3,6 +3,7 @@ session_start();
 include("lib/database_connexion.php");
 include("partials/header.php");
 include("lib/function.php");
+include("lib/constants.php");
 include("partials/navbar.php");
 
 

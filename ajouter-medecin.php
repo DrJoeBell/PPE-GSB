@@ -2,6 +2,7 @@
   session_start();
   include("lib/database_connexion.php");
   include("lib/function.php");
+  include("lib/constants.php");
 
 
   if (isset($_POST['nom']) && $_POST['nom']!="")

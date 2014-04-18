@@ -1,5 +1,6 @@
 <?php 
   session_start();
+  include("lib/constants.php");
   include("lib/database_connexion.php");
   include("partials/header.php");
   include("lib/function.php");
