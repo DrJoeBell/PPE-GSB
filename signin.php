@@ -1,7 +1,7 @@
 <?php 
     session_start();
-    include("function.php");
-    include("database_connexion.php");
+    include("lib/function.php");
+    include("lib/database_connexion.php");
     if (isset($_POST["login"]) && isset($_POST["password"]))
     {
         $query= "select * from visiteur where login='".$_POST["login"]."' and password='".md5($_POST["password"])."' ;";
@@ -29,7 +29,7 @@
     }
 
 
-include("header.php");
+include("partials/header.php");
 ?>
     <div class="container">
         <form class="form-signin" style="margin-top: 15%;" method="POST" action="signin.php">
@@ -40,5 +40,5 @@ include("header.php");
         </form>
     </div> <!-- /container -->
 <?php 
-include("footer.php");
+include("partials/footer.php");
 ?>

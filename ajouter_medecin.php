@@ -1,11 +1,11 @@
 
 <?php 
   session_start();
-  include("database_connexion.php");
-  include("header.php");
-  include("function.php");
-  include("navbar.php");
-  include("side_navbar.php");
+  include("lib/database_connexion.php");
+  include("partials/header.php");
+  include("lib/function.php");
+  include("partials/navbar.php");
+  include("partials/side_navbar.php");
 
   $nom = $_SESSION['nom'];
   $prenom = $_SESSION['prenom'];
@@ -111,4 +111,4 @@
     </form>
 
   </div><!--/.row-->
-<?php include("footer.php");?>
+<?php include("partials/footer.php");?>
