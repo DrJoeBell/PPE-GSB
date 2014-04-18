@@ -14,7 +14,7 @@ include("lib/database_connexion.php");
 if(isset($_GET["a"]))
 if (($_GET["a"]=="login"))
   {
-    flashMessage("success","Bienvenue sur l'application GSB");
+    setFlash("success","Bienvenue sur l'application GSB");
   }
 ?>
 
