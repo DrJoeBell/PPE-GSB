@@ -1,11 +1,19 @@
 <?php
-function flashMessage($type, $message)
+function flashMessage()
 {
-		echo
-		"<div class='flashMessage alert alert-".$type." animated fadeInDown'>
-		".$message."
-		<button class='close' data-dismiss='alert'>x</button>
-		</div>";
+    if (isset($_SESSION['flash'])) {
+        echo $_SESSION['flash'];
+        unset($_SESSION['flash']);
+    }
+}
+function setFlash($type="success", $message){
+    $_SESSION['flash'] = 
+    "<div class='alert alert-$type alert-dismissable'>
+        <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+        <div class='text-center'>$message</div>
+        
+    </div>
+    ";
 }
 
 function id_compte_rendu($position)
@@ -89,6 +97,9 @@ function nombre_visiteur() //nombre de visiteur commercial
     $result = $bdd->query($query);
     $nb_id = $result->rowCount();
     return $nb_id;
+}
+function select(){
+
 }
 
 
