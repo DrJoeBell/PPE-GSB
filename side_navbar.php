@@ -3,7 +3,7 @@
             <div class="span2">
                 <div style="margin-top:20" class="well sidebar-nav">
                     <ul class="nav nav-list">
-                        <li class="nav-header">Comptes-rendu</li>
+                        <li class="nav-header">Comptes-rendus</li>
                         <li>
                             <a href="compte_rendu.php">
                                 <img src="assets/img/glyphicons_027_search.png" width="12em"/>
