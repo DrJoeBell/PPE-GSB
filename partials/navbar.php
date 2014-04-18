@@ -24,7 +24,7 @@
                   Ajouter un compte rendu
                 </a>
             </li>
-            <li><a href="afficher-compte-rendu.php">
+            <li><a href="afficher_compte_rendu.php">
                   <span class="glyphicon glyphicon-bookmark"></span>
                   Afficher les comptes rendus
                 </a>
@@ -43,7 +43,7 @@
                   Ajouter un médecin
                 </a>
             </li>
-            <li><a href="afficher-medecin.php">
+            <li><a href="afficher_medecin.php">
                   <span class="glyphicon glyphicon-bookmark"></span>
                   Afficher les fiches médecins
                 </a>
