@@ -12,14 +12,64 @@
     </div>
     <div class="navbar-collapse collapse navbar-inverse-collapse">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="index.php">Accueil</a></li>
+        <li class="active"><a href="index.php"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;Accueil</a></li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">
+            <span class="glyphicon glyphicon-file"></span>
+            &nbsp;&nbsp;Comptes Rendus&nbsp;&nbsp;<span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="download">
+            <li><a href="ajouter-compte-rendu.php">
+                  <span class="glyphicon glyphicon-plus"></span>
+                  Ajouter un compte rendu
+                </a>
+            </li>
+            <li><a href="afficher-compte-rendu.php">
+                  <span class="glyphicon glyphicon-bookmark"></span>
+                  Afficher les comptes rendus
+                </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">
+            <span class="glyphicon glyphicon-briefcase"></span>
+            &nbsp;&nbsp;Médecins&nbsp;&nbsp;<span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="download">
+            <li><a href="ajouter-medecin.php">
+                  <span class="glyphicon glyphicon-plus"></span>
+                  Ajouter un médecin
+                </a>
+            </li>
+            <li><a href="afficher-medecin.php">
+                  <span class="glyphicon glyphicon-bookmark"></span>
+                  Afficher les fiches médecins
+                </a>
+            </li>
+          </ul>
+        </li>
+
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download"><?php echo $_SESSION["nom"]." ". $_SESSION["prenom"]?> <span class="caret"></span></a>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">
+            <span class="glyphicon glyphicon-user"></span>
+            &nbsp;&nbsp;<?php echo $_SESSION["nom"]." ". $_SESSION["prenom"]?>
+            <span class="caret"></span>
+          </a>
           <ul class="dropdown-menu" aria-labelledby="download">
-            <li><a href="user_account.php">Modifier les infos</a></li>
-            <li><a href="logout.php">Deconnexion</a></li>
+            <li><a href="user_account.php">
+                  <span class="glyphicon glyphicon-edit"></span>
+                  Modifier les informations
+                </a>
+            </li>
+            <li><a href="logout.php">
+                  <span class="glyphicon glyphicon-off"></span>
+                  Deconnexion
+                </a>
+            </li>
           </ul>
         </li>
       </ul>
@@ -29,3 +79,6 @@
 <br>
 <br>
 <br>
+
+
+

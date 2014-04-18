@@ -3,11 +3,13 @@ session_start();
 if ((!isset($_SESSION["password"]) )&& (!isset($_SESSION["login"])))
 {  header ("Location: signin.php")   ;
     break;}
+    
 include("partials/header.php");
 include("lib/function.php");
 include("partials/navbar.php");
-include("partials/side_navbar.php");
 include("lib/database_connexion.php");
+
+
 if(isset($_GET["a"]))
 if (($_GET["a"]=="login"))
   {

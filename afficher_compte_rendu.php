@@ -4,7 +4,6 @@
   include("partials/header.php");
   include("lib/function.php");
   include("partials/navbar.php");
-  include("partials/side_navbar.php");
 
 //Si le post est rentré
 if(isset($_GET["id"]))

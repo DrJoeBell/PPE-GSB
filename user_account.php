@@ -3,7 +3,8 @@ session_start();
 include("lib/database_connexion.php");
 include("lib/function.php");
 include("partials/navbar.php");
-include("partials/side_navbar.php");
+
+
 if  (!isset($_SESSION["login"]))
 {  header ("Location: signin.php")   ;
     break;}

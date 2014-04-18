@@ -1,34 +1,40 @@
-
 <?php 
   session_start();
   include("lib/database_connexion.php");
-  include("partials/header.php");
   include("lib/function.php");
+
+
+  //Si le post est rentré
+  if(isset($_POST["bilan"]))
+  {
+    $date=$bdd->quote($_POST["date"]);
+    $visiteur=$_POST["visiteur"];
+    $medecin=$_POST["medecin"];
+    $motif=$_POST["motif"];
+    $bilan=$bdd->quote($_POST["bilan"]);
+
+    // insertion d'un nouveau compte rendu dans la base de données
+    $query_insert="INSERT INTO rapport ( ID_REDIGER, ID_CONCERNE, DATERAPPORT, MOTIF, BILAN )
+                    VALUES ($visiteur, $medecin, $date, $motif, $bilan);";
+
+    // exécution de la requête d'insertion
+    $bdd->query($query_insert);
+  }
+
+  $query= "SELECT * FROM medecin ;";
+  $result_medecin = $bdd->query($query);
+  $query= "SELECT * FROM motif ;";
+  $result_motif = $bdd->query($query);
+  $query= "SELECT * FROM visiteur ;";
+  $result_visiteur = $bdd->query($query);
+
+
   include("partials/navbar.php");
-  include("partials/side_navbar.php");
-//Si le post est rentré
-if(isset($_POST["bilan"]))
-{
-  $date=$bdd->quote($_POST["date"]);
-  $visiteur=$_POST["visiteur"];
-  $medecin=$_POST["medecin"];
-  $motif=$_POST["motif"];
-  $bilan=$bdd->quote($_POST["bilan"]);
+  include("partials/header.php");
 
-// insertion d'un nouveau compte rendu dans la base de données
-  $query_insert="INSERT INTO rapport ( ID_REDIGER, ID_CONCERNE, DATERAPPORT, MOTIF, BILAN )
-                  VALUES ($visiteur, $medecin, $date,$motif,$bilan);";
-// exécution de la requête d'insertion
-$bdd->query($query_insert);
-}
-
-  $query= "select * from medecin ;";
-$result_medecin = $bdd->query($query);
-  $query= "select * from motif ;";
-$result_motif = $bdd->query($query);
-  $query= "select * from visiteur ;";
-$result_visiteur = $bdd->query($query);
 ?>
+
+
 <div class="span9 offset1 container">
     <div class="row-fluid">
     <h4 style="margin:20 0 0 -10"><i class="icon-plus-sign-alt"></i>Ajouter un compte-rendu</h4>
@@ -89,4 +95,6 @@ $result_motif->closeCursor();
    <button style="margin:auto; width:40%;" type="submit" class="btn span6">Valider</button>
 </form>
   </div><!--/.row-->
+
+  
 <?php include("partials/footer.php");?>
