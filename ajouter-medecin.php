@@ -3,11 +3,8 @@
   include("lib/database_connexion.php");
   include("lib/function.php");
 
-  $nom = $_SESSION['nom'];
-  $prenom = $_SESSION['prenom'];
 
-
-  if (isset($_POST['nom']))
+  if (isset($_POST['nom']) && $_POST['nom']!="")
   {
     $nom=$bdd->quote($_POST["nom"]);
     $prenom=$bdd->quote($_POST["prenom"]);
@@ -42,27 +39,29 @@
   <div class="col-sm-3"></div>
   <div class="col-sm-6">
     <div class="well bs-component">
-      <form class="form-horizontal" action="ajouter-medecin.php" method="POST">
+
+      <form class="form-horizontal" action="#" method="POST">
+
         <fieldset>
-          <legend>Ajouter un practicien pour <?= $_SESSION['nom'] .'&nbsp;'. $_SESSION['prenom'] ;?></legend>
+          <legend>Ajouter un médecin</legend>
           <div class="form-group">
             <label for="nom" class="col-lg-2 control-label">Nom</label>
             <div class="col-lg-10">
-              <input type="text" class="form-control" id="nom" placeholder="Nom">
+              <input type="text" class="form-control" name="nom" id="nom" placeholder="Nom">
             </div>
           </div>
 
           <div class="form-group">
             <label for="prenom" class="col-lg-2 control-label">Prénom</label>
             <div class="col-lg-10">
-              <input type="text" class="form-control" id="prenom" placeholder="Prénom">
+              <input type="text" class="form-control" name="prenom" id="prenom" placeholder="Prénom">
             </div>
           </div>
 
            <div class="form-group">
             <label for="select" class="col-lg-2 control-label">Spécialité</label>
             <div class="col-lg-10">
-              <select class="form-control" id="select">
+              <select class="form-control" name="specialite" id="specialite">
                 <?php
                   while ($value = $result_spe->fetch())
                   {
@@ -77,35 +76,41 @@
           <div class="form-group">
             <label for="adresse" class="col-lg-2 control-label">Adresse</label>
             <div class="col-lg-10">
-              <input type="text" class="form-control" id="adresse" placeholder="Adresse">
+              <input type="text" class="form-control" name="adresse" id="adresse" placeholder="Adresse">
             </div>
           </div>
 
           <div class="form-group">
             <label for="ville" class="col-lg-2 control-label">Ville</label>
             <div class="col-lg-10">
-              <input type="text" class="form-control" id="ville" placeholder="Ville">
+              <input type="text" class="form-control" name="ville" id="ville" placeholder="Ville">
             </div>
           </div>
 
           <div class="form-group">
             <label for="cp" class="col-lg-2 control-label">Code postal</label>
             <div class="col-lg-10">
-              <input type="text" class="form-control" id="cp" placeholder="XXXXX">
+              <input type="text" class="form-control" name="cp" id="cp" placeholder="XXXXX">
             </div>
           </div>
 
           <div class="form-group">
             <label for="tel" class="col-lg-2 control-label">Téléphone</label>
             <div class="col-lg-10">
-              <input type="text" class="form-control" id="tel" placeholder="xx xx xx xx xx">
+              <input type="text" class="form-control" name="tel" id="tel" placeholder="xx xx xx xx xx">
             </div>
           </div>
 
           <div class="form-group">
             <label for="departement" class="col-lg-2 control-label">Département</label>
             <div class="col-lg-10">
-              <input type="text" class="form-control" id="departement" placeholder="XX">
+              <input type="text" class="form-control" name="departement" id="departement" placeholder="XX">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+              <button type="submit" class="btn btn-primary">Enregistrer</button>
             </div>
           </div>
 

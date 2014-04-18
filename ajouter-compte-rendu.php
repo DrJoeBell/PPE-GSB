@@ -34,67 +34,86 @@
 
 ?>
 
+<div class="row">
+  <div class="col-sm-3"></div>
+  <div class="col-sm-6">
+    <div class="well bs-component">
 
-<div class="span9 offset1 container">
-    <div class="row-fluid">
-    <h4 style="margin:20 0 0 -10"><i class="icon-plus-sign-alt"></i>Ajouter un compte-rendu</h4>
-    <hr>
-    <div class="clearfix">
-    <!-- ##################################-->
-    <form method="POST" action="ajouter_compte_rendu.php">
-      <fieldset >
-        <label>Date</label>
-        <input style="width:40%" name="date" type="text" class="span4 datepicker" value="<?php echo date("d/m/Y") ?>">
-      </fieldset>
-      <!-- ##################################-->
-      <fieldset >
-        <label>Visiteur</label>
-    <select style="width:40%" name="visiteur">
-      <?php
-          while($value =$result_visiteur->fetch())
-          {
-              echo "<option  value='".$value['ID']."'>".$value['PRENOM']." ".$value['NOM']."</option>";
-          }
-          $result_visiteur->closeCursor();
-      ?>
-    </select>
-      </fieldset>
-      <!-- ##################################-->
-        <fieldset >
-        <label>Médecin</label>
-    <select style="width:40%" name="medecin">
-      <?php
-    while($value =$result_medecin->fetch())
-  {
-   echo "<option value='".$value['ID']."'>".$value['PRENOM']." ".$value['NOM']."</option>";
-  }
-$result_medecin->closeCursor();
+      <form class="form-horizontal" action="#" method="POST">
 
-      
-      ?>
-    </select>
-      </fieldset>
-      <!-- ##################################-->
-        <fieldset >
-        <label>Motif</label>
-      <select style="width:40%" name="motif">
-      <?php
-    while($value =$result_motif->fetch())
-  {
-   echo "<option value='".$value['id']."'>".$value['libelle']."</option>";
-  }
-$result_motif->closeCursor();
-      ?>
-    </select>
-   </fieldset>
-   <!-- ##################################-->
-    <fieldset>
-    <label>Bilan</label>
-    <textarea id="textarea" style="width:40%" cols="40" rows="5" name="bilan" placeholder="Écrivez ici ce que vous concluez sur cette visite..."></textarea>
-  </fieldset>
-   <button style="margin:auto; width:40%;" type="submit" class="btn span6">Valider</button>
-</form>
-  </div><!--/.row-->
+        <fieldset>
+          <legend>Ajouter un compte rendu</legend>
+
+          <div class="form-group">
+            <label for="textArea" class="col-lg-2 control-label">Date</label>
+            <div class="col-lg-10">
+              <input type="text" class="form-control" name="date" id="date" value="<?php echo date("d/m/Y"); ?>" placeholder="<?php echo date("d/m/Y"); ?>">
+            </div>
+          </div>
+
+           <div class="form-group">
+            <label for="select" class="col-lg-2 control-label">Visiteur</label>
+            <div class="col-lg-10">
+              <select class="form-control" name="visiteur" id="visiteur">
+                <?php
+                  while($value =$result_visiteur->fetch())
+                  {
+                    echo "<option  value='".$value['ID']."'>".$value['PRENOM']." ".$value['NOM']."</option>";
+                  }
+                  $result_visiteur->closeCursor();
+                ?>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="select" class="col-lg-2 control-label">Médecin</label>
+            <div class="col-lg-10">
+              <select class="form-control" name="medecin" id="medecin">
+                <?php
+                  while($value =$result_medecin->fetch())
+                  {
+                    echo "<option value='".$value['ID']."'>".$value['PRENOM']." ".$value['NOM']."</option>";
+                  }
+                  $result_medecin->closeCursor();
+                ?>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="select" class="col-lg-2 control-label">Motif</label>
+            <div class="col-lg-10">
+              <select class="form-control" name="motif" id="motif">
+                  <?php
+                    while($value =$result_motif->fetch())
+                    {
+                      echo "<option value='".$value['id']."'>".$value['libelle']."</option>";
+                    }
+                    $result_motif->closeCursor();
+                  ?>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="textArea" class="col-lg-2 control-label">Bilan</label>
+            <div class="col-lg-10">
+              <textarea class="form-control" rows="3" name="bilan" id="bilan" placeholder="Ecrivez votre bilan de visite."></textarea>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+              <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </div>
+          </div>
+
+        </fieldset>
+      </form>
+    </div>
+  </div>
+
 
   
 <?php include("partials/footer.php");?>
