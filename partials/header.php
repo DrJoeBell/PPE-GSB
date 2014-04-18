@@ -11,7 +11,7 @@
         <link rel="shortcut icon" href="images/logo_GSB.png" />
 
         <!-- Le styles -->
-        <link href="assets/css/bootstrap.css" rel="stylesheet">
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet">
         <link href="assets/css/custom.css" rel="stylesheet">
 
 

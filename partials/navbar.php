@@ -7,8 +7,7 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="#">
-          <?php setlocale (LC_TIME, 'fr_FR.ISO-8859-1','fra');
-                echo (strftime("%A %d %B")); ?>
+
       </a>
     </div>
     <div class="navbar-collapse collapse navbar-inverse-collapse">
