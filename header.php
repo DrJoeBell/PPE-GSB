@@ -1,0 +1,56 @@
+<!-- saved from url=(0050)http://getbootstrap.com/2.3.2/examples/signin.html -->
+<html lang="fr">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+        <meta charset="utf-8">
+        <title>Web Application PP3_GSB</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="L'application web permettant la gestion de la base de données du cas GSB, développée par Richard Clément, Plissonneau Valentin et Pasco Mathieu, dans le cadre d'un projet du module PPE">
+        <meta name="author" content="Richard Clément, Plissonneau Valentin, Pasco Mathieu">
+
+        <link rel="shortcut icon" href="images/logo_GSB.png" />
+
+        <!-- Le styles -->
+        <link href="assets/css/bootstrap-my.css" rel="stylesheet">
+        <link href="assets/css/custom.css" rel="stylesheet">
+        <link href="assets/css/animate-custom.css" rel="stylesheet">
+
+        <style type="text/css">
+            body {
+              padding-top: 40px;
+              padding-bottom: 40px;
+              background-color: #f5f5f5;
+            }
+            .form-signin {
+              max-width: 300px;
+              padding: 19px 29px 29px;
+              margin: 0 auto 20px;
+              background-color: #fff;
+              border: 1px solid #e5e5e5;
+              -webkit-border-radius: 5px;
+                 -moz-border-radius: 5px;
+                      border-radius: 5px;
+              -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                 -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                      box-shadow: 0 1px 2px rgba(0,0,0,.05);
+            }
+            .form-signin .form-signin-heading,
+            .form-signin .checkbox {
+              margin-bottom: 10px;
+            }
+            .form-signin input[type="text"],
+            .form-signin input[type="password"] {
+              font-size: 16px;
+              height: auto;
+              margin-bottom: 15px;
+              padding: 7px 9px;
+            }
+        </style>
+
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+          <script src="../assets/js/html5shiv.js"></script>
+        <![endif]-->
+      <style type="text/css"></style>
+    </head>
+    <body>
