@@ -1,19 +1,63 @@
 <?php 
   session_start();
   include("lib/database_connexion.php");
-  include("partials/header.php");
   include("lib/function.php");
+  include("lib/constants.php");
+if (isset($_GET['page']) && is_numeric($_GET['page'])){
+      $page = $_GET['page'];
+      $nbParPage = 2;
+      $limit = ($page-1) * $nbParPage;
+      $limit2 = $limit + $nbParPage;
+      $query = "SELECT * FROM rapport ORDER BY ID LIMIT $limit, $limit2";
+      $result = $bdd->query($query);
+      $rapport = $result->fetchAll();
+}
+elseif (isset($_GET['id']) && is_numeric($_GET['id'])) {
+      $IdRapport = $bdd->quote($_GET['id']);
+      $query = "SELECT * FROM rapport WHERE ID=".$IdRapport;
+      $result=$bdd->query($query);
+      $rapport = $result->fetchAll();
+}
+  include("partials/header.php");
   include("partials/navbar.php");
-  include("partials/side_navbar.php");
+?>
+<div class="container">
+  <h1>Affichage des compte-rendu</h1>
+  <div class="row">
+    
+      <?php foreach($rapport as $CompteRendu):?>
+          <div class="well">
+            <h4><span class="glyphicon glyphicon-time"></span> <?= $CompteRendu['DATERAPPORT'];?></h4>
+            <div><?= $CompteRendu['BILAN'];?></div>
+            <div><?= $CompteRendu['MOTIF'];?></div>
+            <div><?= $CompteRendu['ID_REDIGER'];?></div>
+            <div><?= $CompteRendu['ID_CONCERNE'];?></div>
+          </div>
+      <?php endforeach; ?>
+      
+  </div>
+  <ul class="pager">
+  <li class="previous disabled"><a href="#">&larr; Précédents</a></li>
+  <li class="next"><a href="<?= WEBROOT ?>afficher_compte_rendu.php?page=<?= ($_GET['page']+1) ?>">Suivants &rarr;</a></li>
+</ul>
+</div>
+
+
+
+<!-- 
+
+<?php
+
+
+
+
 
 //Si le post est rentré
 if(isset($_GET["id"]))
 {
   if ($_GET["id"]=="all")
   {
-    //variable pour tout afficher
-      $tout_afficher=true;
-    if (isset($_GET["pos"]))
+    if (isset($_GET["page"]))
     {
       $query="SELECT * FROM rapport where ID=". id_compte_rendu($_GET['pos']).";";
     }
@@ -128,5 +172,5 @@ $result_visiteur = $bdd->query($query);
 
 
 
-      ?>
+      ?> -->
 <?php include("partials/footer.php");?>

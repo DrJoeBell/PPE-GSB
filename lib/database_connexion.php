@@ -1,8 +1,8 @@
 <?php
 $database="usersio_gsb";
-$server="mysql1.alwaysdata.com";
-$user="usersio";
-$password="mavace";
+$server="localhost";
+$user="root";
+$password="root";
 try{
 $bdd = new PDO("mysql:host=$server; dbname=$database", $user, $password );
 
