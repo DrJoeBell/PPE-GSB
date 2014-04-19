@@ -97,8 +97,8 @@
         <div class="modal-body">
             <p>
              <div class="input-group">
-              <input type="text" placeholder="Rechercher..." name="q" class="form-control">
               <input type="text" value="1" name="page" hidden>
+              <input type="text" placeholder="Rechercher..." name="q" class="form-control">
               <span class="input-group-btn">
                 <button class="btn btn-danger" type="submit">Go!</button>
               </span>
