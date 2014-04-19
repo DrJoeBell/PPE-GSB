@@ -20,12 +20,13 @@
         $result->closeCursor();
         if (isset($user_exist_ok))
         {
-            header ("Location: index.php?a=login")   ;
+            setFlash("success","Bienvenue sur l'application GSB");
+            header ("Location: index.php")   ;
             break;
         }
         else
         {
-            flashMessage("error","Informations erronées");
+            setFlash("error","Informations erronées");
         }
     }
 
