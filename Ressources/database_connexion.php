@@ -1,10 +1,9 @@
 <?php
-// $database="usersio_gsb";
-// $server="mysql1.alwaysdata.com";
-// $user="usersio";
-// $password="mavace";
+
+//Fichier à copier dans lib/
 
 
+// remplacer les variables suivantes:
 $database="usersio_gsb";
 $server="localhost";
 $user="Utilisateur";
