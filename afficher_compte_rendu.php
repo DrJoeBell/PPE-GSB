@@ -89,7 +89,7 @@ else{
               <ul class="meta-search">
                 <li><i class="glyphicon glyphicon-calendar"></i> <span>&nbsp;<?= $CompteRendu['DATERAPPORT'];?></span></li>
                 <li><i class="glyphicon glyphicon-flag" ></i> <span>&nbsp;<?= $CompteRendu['motif'];?></span></li>
-                <li><i class="glyphicon glyphicon-user" ></i> <span>&nbsp;Auteur: <?= $CompteRendu['nomRedige'].' '.$CompteRendu['prenomRedige'];?></span></li>
+                <li><i class="glyphicon glyphicon-user" ></i> <span>&nbsp;Médecin visité: <?= $CompteRendu['nomRedige'].' '.$CompteRendu['prenomRedige'];?></span></li>
                 <li><i class="glyphicon glyphicon-user" ></i> <span>&nbsp;Visiteur: <?= $CompteRendu['nomVisite'].' '.$CompteRendu['prenomVisite'];?></span></li>
               </ul>
             </div>
