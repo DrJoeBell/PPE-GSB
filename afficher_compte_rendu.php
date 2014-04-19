@@ -46,17 +46,35 @@ else{
 ?>
 <div class="container">
   <h1>Affichage des compte-rendu</h1>
-  <hr>
   <div class="row">
     
       <?php foreach($rapport as $CompteRendu):?>
-          <div class="well">
+<!--           <div class="well">
             <h4><span class="glyphicon glyphicon-time"></span> <?= $CompteRendu['DATERAPPORT'];?></h4>
             <blockquote style="font-size:15px;"><?= $CompteRendu['BILAN'];?></blockquote style="text:10px;">
             <div>Motif: <?= $CompteRendu['motif'];?></div>
             <div>Rédiger par: <?= $CompteRendu['nomRedige'].' '.$CompteRendu['prenomRedige'];?></div>
             <div>Visiteur: <?= $CompteRendu['nomVisite'].' '.$CompteRendu['prenomVisite'];?></div>
-          </div>
+          </div> -->
+          <article class="compte-rendu-list row">
+            <div class="col-xs-12 col-sm-12 col-md-3">
+              <ul class="meta-search">
+                <li><i class="glyphicon glyphicon-calendar"></i> <span>&nbsp;<?= $CompteRendu['DATERAPPORT'];?></span></li>
+                <li><i class="glyphicon glyphicon-flag" ></i> <span>&nbsp;<?= $CompteRendu['motif'];?></span></li>
+                <li><i class="glyphicon glyphicon-user" ></i> <span>&nbsp;Auteur: <?= $CompteRendu['nomRedige'].' '.$CompteRendu['prenomRedige'];?></span></li>
+                <li><i class="glyphicon glyphicon-user" ></i> <span>&nbsp;Visiteur: <?= $CompteRendu['nomVisite'].' '.$CompteRendu['prenomVisite'];?></span></li>
+              </ul>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-9">
+            <div class="panel panel-primary">
+              <div class="panel-heading">Bilan:</div>
+                <div class="panel-body">
+                  <p><?= $CompteRendu['BILAN'];?></p>
+                </div>
+              </div>
+            </div>
+          </article>
+
       <?php endforeach; ?>
       
   </div>

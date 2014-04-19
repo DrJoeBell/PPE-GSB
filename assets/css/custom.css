@@ -1,0 +1,18 @@
+.compte-rendu-list:first-child{
+	border-top:solid #FF0000;
+	border-top-width:thin;
+	padding-top: 50px;
+	margin-top: 20px;
+}
+.compte-rendu-list{
+	border-bottom:solid #ff0000;
+	border-bottom-width:thin;
+	padding-bottom: 50px;
+	margin-bottom: 70px;
+}
+.compte-rendu-list ul{
+	margin-top: 15px;
+	padding-left: 0 !important; 
+	list-style: none;
+
+}
