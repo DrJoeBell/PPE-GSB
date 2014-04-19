@@ -8,21 +8,49 @@ if (isset($_GET['page']) && is_numeric($_GET['page'])){
       $nbParPage = 2;
       $limit = ($page-1) * $nbParPage;
       
-      $query = 
-      "SELECT r.DATERAPPORT, r.BILAN, mo.libelle as motif, m.NOM as nomRedige, v.NOM as nomVisite, m.PRENOM as prenomRedige, v.PRENOM as prenomVisite
-        FROM rapport r
-        INNER JOIN medecin m ON m.ID = r.ID_REDIGER
-        INNER JOIN visiteur v ON v.ID = r.ID_CONCERNE
-        INNER JOIN motif mo ON mo.ID = r.MOTIF
-        ORDER BY r.ID LIMIT $limit, $nbParPage";
+      if (isset($_GET['q'])) {
+          $search= substr_replace($_GET['q'], '%', 0, 0); //ajoute % au debut
+          $search .= '%'; // ajoute % a la fin
+          $search = $bdd->quote($search);
+          $query = 
+              "SELECT r.ID, r.DATERAPPORT, r.BILAN, mo.libelle as motif, m.NOM as nomRedige, v.NOM as nomVisite, m.PRENOM as prenomRedige, v.PRENOM as prenomVisite FROM rapport r
+                INNER JOIN medecin m ON m.ID = r.ID_REDIGER
+                INNER JOIN visiteur v ON v.ID = r.ID_CONCERNE
+                INNER JOIN motif mo ON mo.ID = r.MOTIF
+                 WHERE r.BILAN lIKE ".$search." ORDER BY r.ID LIMIT $limit, $nbParPage";
+          $result=$bdd->query($query);
+          $rapport = $result->fetchAll();
+          if($result->rowCount()<1){
+            if ($page==1) {
+            setFlash("warning","Aucun résultats ne correspond à votre recherche.");
+            header('Location: '.WEBROOT.'afficher_compte_rendu.php?page=1');
+            die();
+            }
+            setFlash("info","Il n'y a plus de compte-rendu ensuite pour votre recherche, vous avez été redirigé en première page.");
+            header('Location: '.WEBROOT.'afficher_compte_rendu.php?page=1&q='.$_GET['q']);
+            die();
+          }
+          $title = "<small>Rechercher: '".$_GET['q']."'</small>";
 
-      $result = $bdd->query($query);
-      $rapport = $result->fetchAll();
-      if($result->rowCount()<1){
-        setFlash("info","Il n'y a plus de compte-rendu ensuite, vous avez été redirigé en première page.");
-        header('Location: '.WEBROOT.'afficher_compte_rendu.php?page=1');
-        die();
-      }
+        }
+        else{
+            $query = 
+            "SELECT r.DATERAPPORT, r.BILAN, mo.libelle as motif, m.NOM as nomRedige, v.NOM as nomVisite, m.PRENOM as prenomRedige, v.PRENOM as prenomVisite
+              FROM rapport r
+              INNER JOIN medecin m ON m.ID = r.ID_REDIGER
+              INNER JOIN visiteur v ON v.ID = r.ID_CONCERNE
+              INNER JOIN motif mo ON mo.ID = r.MOTIF
+              ORDER BY r.ID LIMIT $limit, $nbParPage";
+
+            $result = $bdd->query($query);
+            $rapport = $result->fetchAll();  
+          if($result->rowCount()<1){
+            setFlash("info","Il n'y a plus de compte-rendu ensuite, vous avez été redirigé en première page.");
+            header('Location: '.WEBROOT.'afficher_compte_rendu.php?page=1');
+            die();
+          }
+        }
+
 }
 elseif (isset($_GET['id']) && is_numeric($_GET['id'])) {
       $IdRapport = $bdd->quote($_GET['id']);
@@ -45,17 +73,17 @@ else{
   include("partials/navbar.php");
 ?>
 <div class="container">
-  <h1>Affichage des compte-rendu</h1>
+  <h1>
+  Affichage des compte-rendu
+  <?php
+    if (isset($title)) {
+      echo($title);
+    }
+  ?>
+  </h1>
   <div class="row">
     
       <?php foreach($rapport as $CompteRendu):?>
-<!--           <div class="well">
-            <h4><span class="glyphicon glyphicon-time"></span> <?= $CompteRendu['DATERAPPORT'];?></h4>
-            <blockquote style="font-size:15px;"><?= $CompteRendu['BILAN'];?></blockquote style="text:10px;">
-            <div>Motif: <?= $CompteRendu['motif'];?></div>
-            <div>Rédiger par: <?= $CompteRendu['nomRedige'].' '.$CompteRendu['prenomRedige'];?></div>
-            <div>Visiteur: <?= $CompteRendu['nomVisite'].' '.$CompteRendu['prenomVisite'];?></div>
-          </div> -->
           <article class="compte-rendu-list row">
             <div class="col-xs-12 col-sm-12 col-md-3">
               <ul class="meta-search">
@@ -82,14 +110,18 @@ else{
 
       <?php
       if ($_GET['page']==1) {
-      $classePrevious = 'disabled';
-      $hrefPrevious = '#';
+        $classePrevious = 'disabled';
+        $hrefPrevious = '#';
       }
       else{
         $classePrevious = '';
-      $hrefPrevious = WEBROOT."afficher_compte_rendu.php?page=".($_GET['page']-1);
+        $hrefPrevious = WEBROOT."afficher_compte_rendu.php?page=".($_GET['page']-1);
       }
       $hrefNext = WEBROOT."afficher_compte_rendu.php?page=".($_GET['page']+1);
+      if (isset($_GET['q'])) {
+        $hrefPrevious.="&q=".$_GET['q'];
+        $hrefNext .="&q=".$_GET['q'];
+      }
       ?>
       <ul class="pager">
       <li class="previous <?= $classePrevious; ?>"><a href="<?= $hrefPrevious; ?>">&larr; Précédents</a></li>

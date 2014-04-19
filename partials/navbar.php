@@ -29,6 +29,12 @@
                   Afficher les comptes rendus
                 </a>
             </li>
+            <li>
+              <!-- Small modal -->
+              <a href="#" data-toggle="modal" data-target=".bs-example-modal-sm">
+              <span class="glyphicon glyphicon-search"></span>
+              Rechercher</a>
+            </li>
           </ul>
         </li>
 
@@ -79,4 +85,32 @@
 <br>
 <br>
 <br>
+
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <form action="afficher_compte_rendu.php" method="get">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Compte-rendu</h4>
+        </div>
+        <div class="modal-body">
+            <p>
+             <div class="input-group">
+              <input type="text" placeholder="Rechercher..." name="q" class="form-control">
+              <input type="text" value="1" name="page" hidden>
+              <span class="input-group-btn">
+                <button class="btn btn-danger" type="submit">Go!</button>
+              </span>
+            </div><!-- /input-group -->
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+          <button class="btn btn-primary" type="submit">Rechercher</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
 <?php flashmessage(); ?>
