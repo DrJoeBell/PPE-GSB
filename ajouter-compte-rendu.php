@@ -22,11 +22,11 @@
     $bdd->query($query_insert);
   }
 
-  $query= "SELECT * FROM medecin ;";
+  $query= "SELECT * FROM medecin ORDER BY nom;";
   $result_medecin = $bdd->query($query);
-  $query= "SELECT * FROM motif ;";
+  $query= "SELECT * FROM motif ORDER BY libelle;";
   $result_motif = $bdd->query($query);
-  $query= "SELECT * FROM visiteur ;";
+  $query= "SELECT * FROM visiteur ORDER BY nom;";
   $result_visiteur = $bdd->query($query);
 
 
