@@ -27,7 +27,7 @@
     flashMessage("success","Enregistrement effectué !");
   }
   // recupération des libelle de la table "specialite"
-    $requete_spe = "SELECT ID, LIBELLE FROM specialite;";
+    $requete_spe = "SELECT ID, LIBELLE FROM specialite ORDER BY 2;";
     $result_spe = $bdd->query($requete_spe);
 
 
