@@ -49,7 +49,7 @@
                   Ajouter un médecin
                 </a>
             </li>
-            <li><a href="<?= WEBROOT ;?>afficher_medecin.php">
+            <li><a href="<?= WEBROOT ;?>afficher_medecin.php?page=1">
                   <span class="glyphicon glyphicon-bookmark"></span>
                   Afficher les fiches médecins
                 </a>
