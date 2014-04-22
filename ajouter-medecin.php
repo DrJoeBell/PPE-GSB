@@ -13,12 +13,30 @@
     $cp = "XXXXX";
     $tel = "xx xx xx xx xx";
     $departement = "xx";
+    $ok = false;
 
 ////////////// //// /////////////////
 
   // modification du medecin
   if(isset($_GET['id'])){
     $id = $_GET['id'];
+
+
+    // erreur de ID ou non existant
+    $query = "SELECT * FROM medecin;";
+    $result = $bdd->query($query);
+
+    foreach ($result as $key) {
+      if($key['ID'] == $id){
+        $ok = true;
+      }
+    }
+
+    if($ok == false){
+      setFlash("danger", "Il n'y a pas de médecin correspondant !");
+      header ("Location: " . WEBROOT);
+      die();
+    }
 
     $query = "SELECT * FROM medecin WHERE id = $id;";
     $resultMed = $bdd->query($query);
@@ -66,6 +84,11 @@
     $bdd->query($insertion);
     flashMessage("success","Enregistrement effectué !");
   }
+
+
+///////////////////////////
+
+
 
   // recupération des libelles de la table "specialite"
   $requete_spe = "SELECT ID, LIBELLE FROM specialite ORDER BY 2;";

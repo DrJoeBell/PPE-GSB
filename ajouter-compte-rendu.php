@@ -18,6 +18,7 @@
   $motifModif = "";
   $bilanModif = "";
   $date = date("d/m/Y");
+  $ok = false;
 
 /////////////////////////////////////
 
@@ -25,6 +26,27 @@
   // modification du CR
   if(isset($_GET['id'])){
     $id = $_GET['id'];
+
+    // erreur de ID ou non existant
+    $query = "SELECT * FROM rapport;";
+    $result = $bdd->query($query);
+
+    foreach ($result as $key) {
+      if($key['ID'] == $id){
+        $ok = true;
+      }
+    }
+
+    if($ok == false){
+      setFlash("danger", "Il n'y a pas de compte rendu correspondant !");
+      header ("Location: " . WEBROOT);
+      die();
+    }
+
+
+
+
+
     $query = "SELECT * FROM rapport WHERE id = $id;";
     $resultModif = $bdd->query($query);
 
