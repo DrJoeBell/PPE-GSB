@@ -8,31 +8,35 @@
   //Si le post est rentré
   if(isset($_POST["bilan"]))
   {
-    $date=$bdd->quote($_POST["date"]);
-    $visiteur=$_POST["visiteur"];
-    $medecin=$_POST["medecin"];
-    $motif=$_POST["motif"];
-    $bilan=$bdd->quote($_POST["bilan"]);
+    $date = $bdd->quote($_POST["date"]);
+    $visiteur = $_POST["visiteur"];
+    $medecin = $_POST["medecin"];
+    $motif = $_POST["motif"];
+    $bilan = $bdd->quote($_POST["bilan"]);
 
     // insertion d'un nouveau compte rendu dans la base de données
-    $query_insert="INSERT INTO rapport ( ID_REDIGER, ID_CONCERNE, DATERAPPORT, MOTIF, BILAN )
+    $query_insert = "INSERT INTO rapport ( ID_REDIGER, ID_CONCERNE, DATERAPPORT, MOTIF, BILAN )
                     VALUES ($visiteur, $medecin, $date, $motif, $bilan);";
 
     // exécution de la requête d'insertion
     $bdd->query($query_insert);
   }
 
-  $query= "SELECT * FROM medecin ORDER BY nom;";
+  // selection des medecins
+  $query= "SELECT * FROM medecin ;";
   $result_medecin = $bdd->query($query);
-  $query= "SELECT * FROM motif ORDER BY libelle;";
+
+  // selection des motifs de CR
+  $query= "SELECT * FROM motif ;";
   $result_motif = $bdd->query($query);
-  $query= "SELECT * FROM visiteur ORDER BY nom;";
+
+  // selection des visiteurs
+  $query= "SELECT * FROM visiteur ;";
   $result_visiteur = $bdd->query($query);
 
 
   include("partials/navbar.php");
   include("partials/header.php");
-
 ?>
 
 <div class="row">

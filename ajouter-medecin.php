@@ -5,18 +5,17 @@
   include("lib/constants.php");
 
 
-  if (isset($_POST['nom']) && $_POST['nom']!="")
+  // si le nom est saisie et non nul
+  if (isset($_POST['nom']) && $_POST['nom'] != '')
   {
-    $nom=$bdd->quote($_POST["nom"]);
-    $prenom=$bdd->quote($_POST["prenom"]);
-    $adresse=$bdd->quote($_POST["adresse"]);
-    $ville=$bdd->quote($_POST["ville"]);
-    $cp=$bdd->quote($_POST["cp"]);
-    $tel=$bdd->quote($_POST["tel"]);
-    $departement=$bdd->quote($_POST["departement"]);
-    $specialite=$bdd->quote($_POST["specialite"]);
-
-
+    $nom = $bdd->quote($_POST["nom"]);
+    $prenom = $bdd->quote($_POST["prenom"]);
+    $adresse = $bdd->quote($_POST["adresse"]);
+    $ville = $bdd->quote($_POST["ville"]);
+    $cp = $bdd->quote($_POST["cp"]);
+    $tel = $bdd->quote($_POST["tel"]);
+    $departement = $bdd->quote($_POST["departement"]);
+    $specialite = $bdd->quote($_POST["specialite"]);
 
 
     // insertion des tuples
@@ -26,14 +25,13 @@
     $bdd->query($insertion);
     flashMessage("success","Enregistrement effectué !");
   }
-  // recupération des libelle de la table "specialite"
-    $requete_spe = "SELECT ID, LIBELLE FROM specialite ORDER BY 2;";
-    $result_spe = $bdd->query($requete_spe);
 
+  // recupération des libelles de la table "specialite"
+  $requete_spe = "SELECT ID, LIBELLE FROM specialite;";
+  $result_spe = $bdd->query($requete_spe);
 
   include("partials/header.php");
   include("partials/navbar.php");
-
 ?>
 
 <div class="row">
@@ -119,9 +117,6 @@
       </form>
     </div>
   </div>
-
-
-
 
 
 <?php include("partials/footer.php");?>
