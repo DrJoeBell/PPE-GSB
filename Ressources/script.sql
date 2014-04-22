@@ -98,6 +98,13 @@ CREATE TABLE IF NOT EXISTS `rapport` (
   KEY `FK_RAPPORT_MOTIF` (`MOTIF`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=12 ;
 
+--
+-- Contenu de la table `rapport`
+--
+
+INSERT INTO `rapport` (`ID`, `ID_REDIGER`, `ID_CONCERNE`, `DATERAPPORT`, `MOTIF`, `BILAN`) VALUES
+(1, 1, 1 , '2012/04/22', 1, 'Lorem ipsum');
+
 -- --------------------------------------------------------
 
 --
@@ -119,8 +126,10 @@ INSERT INTO `specialite` (`ID`, `LIBELLE`) VALUES
 (2, 'Othopédie'),
 (3, 'Généraliste'),
 (4, 'Pédo-psychatrie'),
-(5, 'Cancerologie'),
-(6, 'Proctologie');
+(5, 'Cancérologie'),
+(6, 'Pneumologie'),
+(7, 'Médecine du sport'),
+(8, 'Cardiologie');
 
 -- --------------------------------------------------------
 
@@ -154,9 +163,9 @@ INSERT INTO `visiteur` (`ID`, `NOM`, `PRENOM`, `LOGIN`, `PASSWORD`, `ADRESSE`, `
 (4, 'Lopez', 'Jenny', 'martin4', '202cb962ac59075b964b07152d234b70', '32 Ruelle des Illuminés', 'Metz', '57000', 'toto@toto.fr', '25/10/2008'),
 (5, 'Blanc', 'Alysson', 'martin5', '202cb962ac59075b964b07152d234b70', '93 Rue de la Soif', 'Rennes', '35000', 'blanc@blanc.com', '05/08/2010'),
 (6, 'Girard', 'Alistair', 'martin6', '202cb962ac59075b964b07152d234b70', '52 Avenue de l''étrange', 'Niort', '79000', '', '03/07/2009'),
-(7, 'PASCO', 'Mathieu', 'mathieu', '202cb962ac59075b964b07152d234b70', '11, rue du gaie jean-louis', 'Rennes', '35700', '', '01/01/2001'),
-(8, 'ADMIN', 'Valentin', 'val', '202cb962ac59075b964b07152d234b70', '15, rue de la joie', 'Nantes', '44000', 'moi@moi.moi', '01/01/2001'),
-(9, 'ADMIN', 'Clément', 'clement', '202cb962ac59075b964b07152d234b70', '42, rue de l''indice', 'New-York', '99011', 'tit@titi.fr', '03/07/2009');
+(7, 'Pasco', 'Mathieu', 'mathieu', '202cb962ac59075b964b07152d234b70', '11, rue du gaie jean-louis', 'Rennes', '35700', 'tito@plot.fr', '01/01/2011'),
+(8, 'Plissonneau', 'Valentin', 'val', '202cb962ac59075b964b07152d234b70', '15, rue de la joie', 'Nantes', '44000', 'moi@moi.moi', '01/01/2001'),
+(9, 'Richard', 'Clément', 'clement', '202cb962ac59075b964b07152d234b70', '42, rue de l''indice', 'New-York', '99011', 'tit@titi.fr', '03/07/2009');
 
 --
 -- Contraintes pour les tables exportées
