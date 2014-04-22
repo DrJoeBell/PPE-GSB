@@ -27,7 +27,7 @@
   }
 
   // recupération des libelles de la table "specialite"
-  $requete_spe = "SELECT ID, LIBELLE FROM specialite;";
+  $requete_spe = "SELECT ID, LIBELLE FROM specialite ORDER BY 2;";
   $result_spe = $bdd->query($requete_spe);
 
   include("partials/header.php");
