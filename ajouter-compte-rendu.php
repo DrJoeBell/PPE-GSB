@@ -52,7 +52,7 @@
           <div class="form-group">
             <label for="textArea" class="col-lg-2 control-label">Date</label>
             <div class="col-lg-10">
-              <input type="text" class="form-control" name="date" id="date" value="" placeholder="">
+              <input type="text" class="form-control" name="date" id="date" value="<?php echo date("d/m/Y"); ?>" placeholder="<?php echo date("d/m/Y"); ?>">
             </div>
           </div>
 
