@@ -43,7 +43,7 @@ if (isset($_GET['page']) && is_numeric($_GET['page'])){
         }
         else{
             $query = 
-            "SELECT r.DATERAPPORT, r.BILAN, mo.libelle as motif, m.NOM as nomRedige, v.NOM as nomVisite, m.PRENOM as prenomRedige, v.PRENOM as prenomVisite
+            "SELECT r.ID, r.DATERAPPORT, r.BILAN, mo.libelle as motif, m.NOM as nomRedige, v.NOM as nomVisite, m.PRENOM as prenomRedige, v.PRENOM as prenomVisite
               FROM rapport r
               INNER JOIN medecin m ON m.ID = r.ID_REDIGER
               INNER JOIN visiteur v ON v.ID = r.ID_CONCERNE
@@ -103,7 +103,8 @@ else{
             </div>
             <div class="col-xs-12 col-sm-12 col-md-9">
             <div class="panel panel-primary">
-              <div class="panel-heading">Bilan:</div>
+            
+              <div class="panel-heading">Bilan de la visite<a href="<?= WEBROOT.'ajouter-compte-rendu.php?id='.$CompteRendu['ID']; ?>" class="btn btn-xs btn-default pull-right"><span class="glyphicon glyphicon-edit"></span>&nbsp;Modifier</a></div>
                 <div class="panel-body">
                   <p><?= $CompteRendu['BILAN'];?></p>
                 </div>
