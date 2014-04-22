@@ -1,43 +1,51 @@
 <?php 
-session_start();
-include("lib/database_connexion.php");
-include("lib/constants.php");
-include("lib/function.php");
+  session_start();
+  include("lib/database_connexion.php");
+  include("lib/constants.php");
+  include("lib/function.php");
 
-if (!isset($_SESSION["login"]))
-{
-  header ("Location: signin.php")   ;
-  die();
-}
-if (isset($_POST["nom"]))
-{
-  if ($_POST["pass"]!="") #Si le mot de passe est modifié
+
+  // si l'utilisateur n'est pas connecte on le redirige vers la page de connexion
+  if (!isset($_SESSION["login"]))
   {
-    if ($_POST["pass"]==$_POST["pass2"])
-    {
-      $query= "UPDATE visiteur SET NOM = '".$_POST["nom"]."' ,PRENOM = '".$_POST["prenom"]."' ,MAIL = '".$_POST["email"]."' ,MDP = '".md5($_POST["pass"])."' where login='".$_SESSION["login"]."' ;";
-      $result = $bdd->query($query);
-      header ("Location: signin.php");
+    header ("Location: signin.php")   ;
     die();
   }
-    else
+
+  // si le nom est saisie ou connu
+  if (isset($_POST["nom"]))
+  {
+    #Si le mot de passe est modifié
+    if ($_POST["pass"]!="")
     {
-      flashMessage("error","Les mots de passe ne correspondent pas");
+      // verification du mot de passe
+      if ($_POST["pass"]==$_POST["pass2"])
+      {
+        $query= " UPDATE visiteur
+                  SET NOM = '".$_POST["nom"]."' ,PRENOM = '".$_POST["prenom"]."' ,MAIL = '".$_POST["email"]."' ,MDP = '".md5($_POST["pass"])."' where login='".$_SESSION["login"]."' ;";
+        $result = $bdd->query($query);
+
+        header ("Location: signin.php");
+        die();
+      }
+      else
+      {
+        flashMessage("error","Les mots de passe ne correspondent pas");
+      }
+    }
+    else
+    { #Sinon modification du reste des donnees
+      $query= " UPDATE visiteur
+                SET NOM = '".$_POST["nom"]."' ,PRENOM = '".$_POST["prenom"]."' ,MAIL = '".$_POST["email"]."' where login='".$_SESSION["login"]."' ;";
+      $result = $bdd->query($query);
+
+      header ("Location: signin.php");
+      die();
     }
   }
-  else { #Sinon est le même
-    $query= "UPDATE visiteur SET NOM = '".$_POST["nom"]."' ,PRENOM = '".$_POST["prenom"]."' ,MAIL = '".$_POST["email"]."' where login='".$_SESSION["login"]."' ;";
-    $result = $bdd->query($query);
 
-    // setFlash("success","Les modifications ont été enregistrées.");
-
-    header ("Location: signin.php");
-    die();
-  }
-}
-include("partials/header.php");
-include("partials/navbar.php");
-
+  include("partials/header.php");
+  include("partials/navbar.php");
 ?>
 
 <div class="row">
@@ -98,7 +106,5 @@ include("partials/navbar.php");
       </form>
     </div>
   </div>
-
-
 
 <?php include("partials/footer.php");?>
