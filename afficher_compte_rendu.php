@@ -17,7 +17,7 @@ if (isset($_GET['page']) && is_numeric($_GET['page'])){
                 INNER JOIN medecin m ON m.ID = r.ID_REDIGER
                 INNER JOIN visiteur v ON v.ID = r.ID_CONCERNE
                 INNER JOIN motif mo ON mo.ID = r.MOTIF
-                 WHERE r.BILAN lIKE ".$search." ORDER BY r.ID LIMIT $limit, $nbParPage";
+                WHERE r.BILAN LIKE ".$search." ORDER BY r.DATERAPPORT DESC LIMIT $limit, $nbParPage";
           $result=$bdd->query($query);
           $rapport = $result->fetchAll();
           if($result->rowCount()<1){
@@ -40,7 +40,7 @@ if (isset($_GET['page']) && is_numeric($_GET['page'])){
               INNER JOIN medecin m ON m.ID = r.ID_REDIGER
               INNER JOIN visiteur v ON v.ID = r.ID_CONCERNE
               INNER JOIN motif mo ON mo.ID = r.MOTIF
-              ORDER BY r.ID LIMIT $limit, $nbParPage";
+              ORDER BY r.DATERAPPORT DESC LIMIT $limit, $nbParPage";
 
             $result = $bdd->query($query);
             $rapport = $result->fetchAll();  
