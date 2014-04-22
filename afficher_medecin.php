@@ -82,8 +82,8 @@ else{
               <ul>
                 <li><h3><?= $unMedecin['NOM'].' '.$unMedecin['PRENOM'] ?></h3></li>
                 <li><span class="glyphicon glyphicon-globe"></span>&nbsp;<?= $unMedecin['ADRESSE'] ?></li>
-                <li>&nbsp;&nbsp;&nbsp;<?= $unMedecin['VILLE_MEDECIN'] ?></li>
-                <li>&nbsp;&nbsp;&nbsp;<?= $unMedecin['CP_MEDECIN'] ?></li>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?= $unMedecin['VILLE_MEDECIN'] ?></li>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?= $unMedecin['CP_MEDECIN'] ?></li>
                 <li><span class="glyphicon glyphicon-earphone"></span>&nbsp;<?= $unMedecin['TEL'] ?></li>
               </ul>
             </div>

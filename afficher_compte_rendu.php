@@ -4,6 +4,14 @@
   include("lib/function.php");
   include("lib/constants.php");
 if (isset($_GET['page']) && is_numeric($_GET['page'])){
+      //test existance rapport
+      $query="SELECT ID FROM RAPPORT LIMIT 0,1";
+      $result=$bdd->query($query);
+      if($result->rowCount()==0){
+        setFlash("danger","Il n'y a pas de compte-rendu enregistré, vous avez été redirigé en page d'accueil.");
+            header('Location: '.WEBROOT);
+            die();
+      }
       $page = $_GET['page'];
       $nbParPage = 2;
       $limit = ($page-1) * $nbParPage;
@@ -43,7 +51,7 @@ if (isset($_GET['page']) && is_numeric($_GET['page'])){
               ORDER BY r.DATERAPPORT DESC LIMIT $limit, $nbParPage";
 
             $result = $bdd->query($query);
-            $rapport = $result->fetchAll();  
+            $rapport = $result->fetchAll();
           if($result->rowCount()<1){
             setFlash("info","Il n'y a plus de compte-rendu ensuite, vous avez été redirigé en première page.");
             header('Location: '.WEBROOT.'afficher_compte_rendu.php?page=1');
