@@ -25,17 +25,10 @@
     $bdd->query($insertion);
     flashMessage("success","Enregistrement effectué !");
   }
-<<<<<<< HEAD
 
   // recupération des libelles de la table "specialite"
   $requete_spe = "SELECT ID, LIBELLE FROM specialite;";
   $result_spe = $bdd->query($requete_spe);
-=======
-  // recupération des libelle de la table "specialite"
-    $requete_spe = "SELECT ID, LIBELLE FROM specialite ORDER BY 2;";
-    $result_spe = $bdd->query($requete_spe);
->>>>>>> origin/master
-
 
   include("partials/header.php");
   include("partials/navbar.php");

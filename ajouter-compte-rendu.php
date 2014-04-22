@@ -22,7 +22,6 @@
     $bdd->query($query_insert);
   }
 
-<<<<<<< HEAD
   // selection des medecins
   $query= "SELECT * FROM medecin ;";
   $result_medecin = $bdd->query($query);
@@ -33,13 +32,6 @@
 
   // selection des visiteurs
   $query= "SELECT * FROM visiteur ;";
-=======
-  $query= "SELECT * FROM medecin ORDER BY nom;";
-  $result_medecin = $bdd->query($query);
-  $query= "SELECT * FROM motif ORDER BY libelle;";
-  $result_motif = $bdd->query($query);
-  $query= "SELECT * FROM visiteur ORDER BY nom;";
->>>>>>> origin/master
   $result_visiteur = $bdd->query($query);
 
 
