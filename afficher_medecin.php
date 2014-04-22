@@ -7,7 +7,6 @@ if (isset($_GET['page']) && is_numeric($_GET['page'])){
       $page = $_GET['page'];
       $nbParPage = 4;
       $limit = ($page-1) * $nbParPage;
-      
       if (isset($_GET['q'])) {
           $search= substr_replace($_GET['q'], '%', 0, 0); //ajoute % au debut
           $search .= '%'; // ajoute % a la fin
@@ -38,7 +37,7 @@ if (isset($_GET['page']) && is_numeric($_GET['page'])){
             $result = $bdd->query($query);
             $medecins = $result->fetchAll();  
           if($result->rowCount()<1){
-            setFlash("info","Il n'y a plus de compte-rendu ensuite, vous avez été redirigé en première page.");
+            setFlash("info","Il n'y a plus de médecin(s) ensuite, vous avez été redirigé en première page.");
             header('Location: '.WEBROOT.'afficher_medecin.php?page=1');
             die();
           }
