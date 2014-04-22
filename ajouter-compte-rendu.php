@@ -1,9 +1,13 @@
 <?php 
   session_start();
-    if( ! ini_get('date.timezone') )
+
+  // correction date pour Uwamp
+  if( ! ini_get('date.timezone') )
   {
-      date_default_timezone_set('GMT');
+    date_default_timezone_set('GMT');
   }
+
+
   include("lib/database_connexion.php");
   include("lib/function.php");
   include("lib/constants.php");
@@ -27,15 +31,15 @@
   }
 
   // selection des medecins
-  $query= "SELECT * FROM medecin ;";
+  $query= "SELECT * FROM medecin ORDER BY nom;";
   $result_medecin = $bdd->query($query);
 
   // selection des motifs de CR
-  $query= "SELECT * FROM motif ;";
+  $query= "SELECT * FROM motif ORDER BY libelle;";
   $result_motif = $bdd->query($query);
 
   // selection des visiteurs
-  $query= "SELECT * FROM visiteur ;";
+  $query= "SELECT * FROM visiteur ORDER BY nom;";
   $result_visiteur = $bdd->query($query);
 
 
