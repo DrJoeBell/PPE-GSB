@@ -45,17 +45,17 @@ CREATE TABLE IF NOT EXISTS `medecin` (
 --
 
 INSERT INTO `medecin` (`ID`, `ID_POSSEDE`, `NOM`, `PRENOM`, `ADRESSE`, `VILLE_MEDECIN`, `CP_MEDECIN`, `TEL`, `DEPARTEMENT`) VALUES
-(1, 1, 'Sheperd', 'Derek', '69 Rue de la Juiverie', 'Nantes', 44100, '06 12 45 78 36', '44'),
-(10, 2, 'Robbins', 'Arizona', '65 Places des Grands Coeurs', 'Nantes', 44120, '06 36 25 14 98', '35'),
-(11, 3, 'Tafraise', 'Ramon', '2 rue du Fruit', 'OasisLand', 1234, '01 02 03 04 05', '01'),
-(2, 2, 'Grey', 'Meredith', '52 Rue de l''Abreuvoir', '', 0, '06 74 85 96 32', '44'),
-(3, 3, 'Yang', 'Christina', '36 Rue des Cadeniers', '', 0, '06 52 63 41 85', '35'),
-(4, 4, 'Karev', 'Alex', '75 Bd de Doulon', '', 0, '06 33 54 96 87', '35'),
-(5, 5, 'O''Maley', 'Georges', '26 Rue de l''Échappée', '', 0, '06 85 52 41 45', '79'),
-(6, 6, 'Weber', 'Richard', '42 Rue des Ferblantiers', '', 0, '07 52 45 55 21', '79'),
-(7, 2, 'Tim', 'Vincent', '125 Rue de la Monnaie', '', 0, '07 06 25 19 24', '20'),
-(8, 4, 'Hunt', 'Owen', '53 Place des Garennes', '', 0, '06 54 52 51 53', '44'),
-(9, 6, 'Forbes-Montgomery', 'Addison', '83 Avenue des Amours', '', 0, '06 98 56 18 24', '44');
+(1, 1, 'Garcion', 'Cedric', '69 Rue de la Juiverie', 'Nantes', 44100, '02 12 45 78 36', '44'),
+(10, 2, 'Linet', 'Teddy', '65 Places des Grands Coeurs', 'Nantes', 44120, '02 36 25 14 98', '35'),
+(11, 3, 'Chaudet', 'Ramon', '2 rue des Bois Doré', 'Nantes', 44000, '01 02 03 04 05', '01'),
+(2, 2, 'Bertin', 'Élizabeth', '52 Rue de l''Abreuvoir', ' Niort', 79000, '02 74 85 96 32', '44'),
+(3, 3, 'Bousquet', 'Christine', '36 Rue des Cadeniers', 'Paris', 75000, '02 52 63 41 85', '35'),
+(4, 4, 'Canévet', 'Paul', '75 Bd de Doulon', 'Alençon', 61000, '02 33 54 96 87', '35'),
+(5, 5, 'Catoire', 'Georges', '26 Rue de l''Échappée', 'Dijon', 21000, '02 85 52 41 45', '79'),
+(6, 6, 'Pesta', 'Richard', '42 Rue des Ferblantiers', 'Lille', 59000, '02 52 45 55 21', '79'),
+(7, 2, 'Tim', 'Vincent', '125 Rue de la Monnaie', 'Rennes', 35000, '02 02 25 19 24', '20'),
+(8, 4, 'Korb', 'Owen', '53 Place des Garennes', 'Marseille', 13000, '02 54 52 51 53', '44'),
+(9, 6, 'Forbes-Grifon', 'Michel', '83 Avenue des Amours', 'Aix-en-Provence', 13000, '02 98 56 18 24', '44');
 
 -- --------------------------------------------------------
 
@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `rapport` (
   `ID` int(32) NOT NULL AUTO_INCREMENT,
   `ID_REDIGER` int(32) NOT NULL,
   `ID_CONCERNE` int(32) NOT NULL,
-  `DATERAPPORT` int(32) NOT NULL,
+  `DATERAPPORT` date NOT NULL,
   `MOTIF` int(255) DEFAULT NULL,
   `BILAN` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`ID`),
@@ -103,12 +103,7 @@ CREATE TABLE IF NOT EXISTS `rapport` (
 --
 
 INSERT INTO `rapport` (`ID`, `ID_REDIGER`, `ID_CONCERNE`, `DATERAPPORT`, `MOTIF`, `BILAN`) VALUES
-(1, 1, 1, '27/11/2013', 1, 'Rien à signaler, tout est correcte !'),
-(2, 2, 2, '23/10/2013', 2, 'Rien à signaler de particulier, ce'),
-(8, 2, 3, '06/12/2012', 2, 'Ajout d''un test'),
-(9, 3, 2, '06/12/2013', 2, 'test'),
-(10, 1, 1, '06/12/2013', 1, 'coucou'),
-(11, 7, 7, '06/12/2013', 3, 'Cette personne possède un égo .... comment dire ^^');
+(1, 1, 1 , '2012/04/22', 1, 'Lorem ipsum');
 
 -- --------------------------------------------------------
 
@@ -131,8 +126,10 @@ INSERT INTO `specialite` (`ID`, `LIBELLE`) VALUES
 (2, 'Othopédie'),
 (3, 'Généraliste'),
 (4, 'Pédo-psychatrie'),
-(5, 'Cancerologie'),
-(6, 'Proctologie');
+(5, 'Cancérologie'),
+(6, 'Pneumologie'),
+(7, 'Médecine du sport'),
+(8, 'Cardiologie');
 
 -- --------------------------------------------------------
 
@@ -150,7 +147,7 @@ CREATE TABLE IF NOT EXISTS `visiteur` (
   `VILLE` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
   `CP` int(11) NOT NULL,
   `MAIL` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `DATEEMBAUCHE` varchar(32) CHARACTER SET latin1 DEFAULT NULL,
+  `DATEEMBAUCHE` date NOT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -166,9 +163,9 @@ INSERT INTO `visiteur` (`ID`, `NOM`, `PRENOM`, `LOGIN`, `PASSWORD`, `ADRESSE`, `
 (4, 'Lopez', 'Jenny', 'martin4', '202cb962ac59075b964b07152d234b70', '32 Ruelle des Illuminés', 'Metz', '57000', 'toto@toto.fr', '25/10/2008'),
 (5, 'Blanc', 'Alysson', 'martin5', '202cb962ac59075b964b07152d234b70', '93 Rue de la Soif', 'Rennes', '35000', 'blanc@blanc.com', '05/08/2010'),
 (6, 'Girard', 'Alistair', 'martin6', '202cb962ac59075b964b07152d234b70', '52 Avenue de l''étrange', 'Niort', '79000', '', '03/07/2009'),
-(7, 'PASCO', 'Mathieu', 'mathieu', '202cb962ac59075b964b07152d234b70', '11, rue du gaie jean-louis', 'Rennes', '35700', '', 'ADMIN'),
-(8, 'ADMIN', 'Valentin', 'val', '202cb962ac59075b964b07152d234b70', '15, rue de la joie', 'Nantes', '44000', 'moi@moi.moi', '01/01/2001'),
-(9, 'ADMIN', 'Clément', 'clement', '202cb962ac59075b964b07152d234b70', '42, rue de l''indice', 'New-York', '99011', 'tit@titi.fr', 'ADMIN');
+(7, 'Pasco', 'Mathieu', 'mathieu', '202cb962ac59075b964b07152d234b70', '11, rue du gaie jean-louis', 'Rennes', '35700', 'tito@plot.fr', '01/01/2011'),
+(8, 'Plissonneau', 'Valentin', 'val', '202cb962ac59075b964b07152d234b70', '15, rue de la joie', 'Nantes', '44000', 'moi@moi.moi', '01/01/2001'),
+(9, 'Richard', 'Clément', 'clement', '202cb962ac59075b964b07152d234b70', '42, rue de l''indice', 'New-York', '99011', 'tit@titi.fr', '03/07/2009');
 
 --
 -- Contraintes pour les tables exportées
