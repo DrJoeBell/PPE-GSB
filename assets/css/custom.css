@@ -16,3 +16,14 @@
 	list-style: none;
 
 }
+.alert
+{
+	position: fixed;
+	z-index: 10;
+	width: 80%;
+	top: 5%;
+	left: 10%;
+}
+.navbar{
+	z-index: 9;
+}

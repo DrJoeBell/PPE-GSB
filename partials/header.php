@@ -22,3 +22,4 @@
       <style type="text/css"></style>
     </head>
     <body>
+    <?php flashmessage(); ?>
