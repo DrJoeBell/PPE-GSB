@@ -1,5 +1,9 @@
 <?php 
   session_start();
+    if( ! ini_get('date.timezone') )
+  {
+      date_default_timezone_set('GMT');
+  }
   include("lib/database_connexion.php");
   include("lib/function.php");
   include("lib/constants.php");
@@ -23,15 +27,15 @@
   }
 
   // selection des medecins
-  $query= "SELECT * FROM medecin ORDER BY nom;";
+  $query= "SELECT * FROM medecin ;";
   $result_medecin = $bdd->query($query);
 
   // selection des motifs de CR
-  $query= "SELECT * FROM motif ORDER BY libelle;";
+  $query= "SELECT * FROM motif ;";
   $result_motif = $bdd->query($query);
 
   // selection des visiteurs
-  $query= "SELECT * FROM visiteur ORDER BY nom;";
+  $query= "SELECT * FROM visiteur ;";
   $result_visiteur = $bdd->query($query);
 
 
@@ -52,7 +56,7 @@
           <div class="form-group">
             <label for="textArea" class="col-lg-2 control-label">Date</label>
             <div class="col-lg-10">
-              <input type="text" class="form-control" name="date" id="date" value="" placeholder="">
+              <input type="text" class="form-control" name="date" id="date" value="<?php echo date("d/m/Y"); ?>" placeholder="<?php echo date("d/m/Y"); ?>">
             </div>
           </div>
 
