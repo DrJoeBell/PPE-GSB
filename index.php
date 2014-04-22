@@ -19,6 +19,6 @@ if (($_GET["a"]=="login"))
 ?>
 
 <div align="center" style="width: 40%;margin:20 auto;">
-	<img src="images/logo_GSB.png"/>
+	<img src="images/logo_GSB.jpg"/>
 <div>
 <?php include("partials/footer.php");?>

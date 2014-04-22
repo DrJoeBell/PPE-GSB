@@ -4,8 +4,67 @@
   include("lib/function.php");
   include("lib/constants.php");
 
+////////////// INIT /////////////////
 
-  // si le nom est saisie et non nul
+    $nom = "nom";
+    $prenom = "prénom";
+    $adresse = "adresse";
+    $ville = "ville";
+    $cp = "XXXXX";
+    $tel = "xx xx xx xx xx";
+    $departement = "xx";
+    $ok = false;
+
+////////////// //// /////////////////
+
+  // modification du medecin
+  if(isset($_GET['id'])){
+    $id = $_GET['id'];
+
+
+    // erreur de ID ou non existant
+    $query = "SELECT * FROM medecin;";
+    $result = $bdd->query($query);
+
+    foreach ($result as $key) {
+      if($key['ID'] == $id){
+        $ok = true;
+      }
+    }
+
+    if($ok == false){
+      setFlash("danger", "Il n'y a pas de médecin correspondant !");
+      header ("Location: " . WEBROOT);
+      die();
+    }
+
+    $query = "SELECT * FROM medecin WHERE id = $id;";
+    $resultMed = $bdd->query($query);
+
+    foreach ($resultMed as $resultat) {
+      $nom = $resultat['NOM'];
+      $prenom = $resultat['PRENOM'];
+      $idSpe = $resultat['ID_POSSEDE'];
+      $adresse = $resultat['ADRESSE'];
+      $ville = $resultat['VILLE_MEDECIN'];
+      $cp = $resultat['CP_MEDECIN'];
+      $tel = $resultat['TEL'];
+      $departement = $resultat['DEPARTEMENT'];
+    }
+
+    // recuperation de la spe du medecin
+    $query = "SELECT * FROM specialite WHERE id = $idSpe;";
+    $resultSpe = $bdd->query($query)->fetch();
+
+    $specialite = $resultSpe['LIBELLE'];
+
+  }
+
+
+
+///////////////////////////
+
+  // ajout d'un nouveau medecin
   if (isset($_POST['nom']) && $_POST['nom'] != '')
   {
     $nom = $bdd->quote($_POST["nom"]);
@@ -25,6 +84,11 @@
     $bdd->query($insertion);
     flashMessage("success","Enregistrement effectué !");
   }
+
+
+///////////////////////////
+
+
 
   // recupération des libelles de la table "specialite"
   $requete_spe = "SELECT ID, LIBELLE FROM specialite ORDER BY 2;";
@@ -46,14 +110,14 @@
           <div class="form-group">
             <label for="nom" class="col-lg-2 control-label">Nom</label>
             <div class="col-lg-10">
-              <input type="text" class="form-control" name="nom" id="nom" placeholder="Nom">
+              <input type="text" class="form-control" name="nom" id="nom" value="<?= $nom; ?>" placeholder="<?= $nom; ?>">
             </div>
           </div>
 
           <div class="form-group">
             <label for="prenom" class="col-lg-2 control-label">Prénom</label>
             <div class="col-lg-10">
-              <input type="text" class="form-control" name="prenom" id="prenom" placeholder="Prénom">
+              <input type="text" class="form-control" name="prenom" id="prenom"  value="<?= $prenom; ?>" placeholder="<?= $prenom; ?>">
             </div>
           </div>
 
@@ -64,7 +128,11 @@
                 <?php
                   while ($value = $result_spe->fetch())
                   {
-                    echo "<option value='".$value['ID']."'>".$value['LIBELLE']."</option>";
+                    if($specialite == $value['LIBELLE']){
+                      echo "<option selected='selected' value=$idSpe >$specialite</option>";
+                    }else{
+                      echo "<option value='".$value['ID']."'>".$value['LIBELLE']."</option>";
+                    }
                   }
                   $result_spe->closeCursor();
                 ?>
@@ -75,40 +143,41 @@
           <div class="form-group">
             <label for="adresse" class="col-lg-2 control-label">Adresse</label>
             <div class="col-lg-10">
-              <input type="text" class="form-control" name="adresse" id="adresse" placeholder="Adresse">
+              <input type="text" class="form-control" name="adresse" id="adresse" value="<?= $adresse; ?>" placeholder="<?= $adresse; ?>">
             </div>
           </div>
 
           <div class="form-group">
             <label for="ville" class="col-lg-2 control-label">Ville</label>
             <div class="col-lg-10">
-              <input type="text" class="form-control" name="ville" id="ville" placeholder="Ville">
+              <input type="text" class="form-control" name="ville" id="ville" value="<?= $ville; ?>" placeholder="<?= $ville; ?>">
             </div>
           </div>
 
           <div class="form-group">
             <label for="cp" class="col-lg-2 control-label">Code postal</label>
             <div class="col-lg-10">
-              <input type="text" class="form-control" name="cp" id="cp" placeholder="XXXXX">
+              <input type="text" class="form-control" name="cp" id="cp" value="<?= $cp; ?>" placeholder="<?= $cp; ?>">
             </div>
           </div>
 
           <div class="form-group">
             <label for="tel" class="col-lg-2 control-label">Téléphone</label>
             <div class="col-lg-10">
-              <input type="text" class="form-control" name="tel" id="tel" placeholder="xx xx xx xx xx">
+              <input type="text" class="form-control" name="tel" id="tel" value="<?= $tel; ?>" placeholder="<?= $tel; ?>">
             </div>
           </div>
 
           <div class="form-group">
             <label for="departement" class="col-lg-2 control-label">Département</label>
             <div class="col-lg-10">
-              <input type="text" class="form-control" name="departement" id="departement" placeholder="XX">
+              <input type="text" class="form-control" name="departement" id="departement" value="<?= $departement; ?>" placeholder="<?= $departement; ?>">
             </div>
           </div>
 
           <div class="form-group">
             <div class="col-lg-10 col-lg-offset-2">
+              <a href="<?= WEBROOT;?>"><button type="button" class="btn btn-default">Retour</button></a>
               <button type="submit" class="btn btn-primary">Enregistrer</button>
             </div>
           </div>

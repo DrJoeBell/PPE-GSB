@@ -97,8 +97,8 @@
 
           <div class="form-group">
             <div class="col-lg-10 col-lg-offset-2">
+              <a href="<?= WEBROOT;?>"><button type="button" class="btn btn-default">Retour</button></a>
               <button type="submit" class="btn btn-primary">Enregistrer</button>
-              <a href="<?= WEBROOT;?>"><button type="button" class="btn btn-primary">Retour</button></a>
             </div>
           </div>
 

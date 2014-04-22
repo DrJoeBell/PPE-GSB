@@ -7,13 +7,88 @@
     date_default_timezone_set('GMT');
   }
 
-
   include("lib/database_connexion.php");
   include("lib/function.php");
   include("lib/constants.php");
 
+/////////////// INIT /////////////////
+  $dateModif = "";
+  $visiteurModif = "";
+  $medecinModif = "";
+  $motifModif = "";
+  $bilanModif = "";
+  $date = date("d/m/Y");
+  $ok = false;
 
-  //Si le post est rentré
+/////////////////////////////////////
+
+
+  // modification du CR
+  if(isset($_GET['id'])){
+    $id = $_GET['id'];
+
+    // erreur de ID ou non existant
+    $query = "SELECT * FROM rapport;";
+    $result = $bdd->query($query);
+
+    foreach ($result as $key) {
+      if($key['ID'] == $id){
+        $ok = true;
+      }
+    }
+
+    if($ok == false){
+      setFlash("danger", "Il n'y a pas de compte rendu correspondant !");
+      header ("Location: " . WEBROOT);
+      die();
+    }
+
+
+
+
+
+    $query = "SELECT * FROM rapport WHERE id = $id;";
+    $resultModif = $bdd->query($query);
+
+    foreach ($resultModif as $select) {
+      $date = $select['DATERAPPORT'];
+      $visiteurModif = $select['ID_REDIGER'];
+      $medecinModif = $select['ID_CONCERNE'];
+      $motifModif = $select['MOTIF'];
+      $bilanModif = $select['BILAN'];
+    }
+
+    // selection du visiteur
+    $query2 = "SELECT * FROM visiteur WHERE id = $visiteurModif;";
+    $visiteurSelect = $bdd->query($query2)->fetch();
+
+    $nomVisit = $visiteurSelect['NOM'];
+    $prenomVisit = $visiteurSelect['PRENOM'];
+    $idVisit = $visiteurSelect['ID'];
+
+
+    // selection du medecin
+    $query2 = "SELECT * FROM medecin WHERE id = $medecinModif;";
+    $medecinSelect = $bdd->query($query2)->fetch();
+
+    $nomMed = $medecinSelect['NOM'];
+    $idMed = $medecinSelect['ID'];
+    $prenomMed = $medecinSelect['PRENOM'];
+
+
+    // selection du bilan
+    $query2 = "SELECT * FROM motif WHERE id = $motifModif;";
+    $selectMotif = $bdd->query($query2)->fetch();
+
+    $motifSelect = $selectMotif['libelle'];
+    $idBilan = $selectMotif['id'];
+
+  }
+
+
+///////////////////////////
+
+  // ajout d'un CR
   if(isset($_POST["bilan"]))
   {
     $date = $bdd->quote($_POST["date"]);
@@ -30,6 +105,8 @@
     $bdd->query($query_insert);
   }
 
+///////////////////////////////
+
   // selection des medecins
   $query= "SELECT * FROM medecin ORDER BY nom;";
   $result_medecin = $bdd->query($query);
@@ -42,6 +119,7 @@
   $query= "SELECT * FROM visiteur ORDER BY nom;";
   $result_visiteur = $bdd->query($query);
 
+/////////////////////////////
 
   include("partials/navbar.php");
   include("partials/header.php");
@@ -60,7 +138,7 @@
           <div class="form-group">
             <label for="textArea" class="col-lg-2 control-label">Date</label>
             <div class="col-lg-10">
-              <input type="text" class="form-control" name="date" id="date" value="<?php echo date("d/m/Y"); ?>" placeholder="<?php echo date("d/m/Y"); ?>">
+              <input type="text" class="form-control" name="date" id="date" value="<?php echo $date; ?>" placeholder="<?php $date; ?>">
             </div>
           </div>
 
@@ -71,7 +149,12 @@
                 <?php
                   while($value =$result_visiteur->fetch())
                   {
-                    echo "<option  value='".$value['ID']."'>".$value['PRENOM']." ".$value['NOM']."</option>";
+                    if($nomVisit == $value['NOM'] && $prenomVisit == $value['PRENOM']){
+                    echo "<option  selected='selected' value=$idVisit >$prenomVisit $nomVisit </option>";
+
+                    }else{
+                      echo "<option  value='".$value['ID']."'>".$value['PRENOM']." ".$value['NOM']."</option>";
+                    }
                   }
                   $result_visiteur->closeCursor();
                 ?>
@@ -86,7 +169,11 @@
                 <?php
                   while($value =$result_medecin->fetch())
                   {
-                    echo "<option value='".$value['ID']."'>".$value['PRENOM']." ".$value['NOM']."</option>";
+                    if($nomMed == $value['NOM'] && $prenomMed == $value['PRENOM']){
+                      echo "<option  selected='selected' value=$idMed >$prenomMed $nomMed </option>";
+                    }else{
+                      echo "<option value='".$value['ID']."'>".$value['PRENOM']." ".$value['NOM']."</option>";
+                    }
                   }
                   $result_medecin->closeCursor();
                 ?>
@@ -101,7 +188,11 @@
                   <?php
                     while($value =$result_motif->fetch())
                     {
-                      echo "<option value='".$value['id']."'>".$value['libelle']."</option>";
+                      if($motifSelect == $value['libelle']){
+                        echo "<option  selected='selected' value=$idBilan >$motifSelect</option>";
+                      }else{
+                        echo "<option value='".$value['id']."'>".$value['libelle']."</option>";
+                      }
                     }
                     $result_motif->closeCursor();
                   ?>
@@ -112,16 +203,16 @@
           <div class="form-group">
             <label for="textArea" class="col-lg-2 control-label">Bilan</label>
             <div class="col-lg-10">
-              <textarea class="form-control" rows="3" name="bilan" id="bilan" placeholder="Ecrivez votre bilan de visite."></textarea>
+              <textarea class="form-control" rows="3" name="bilan" id="bilan" value="<?= $bilanModif; ?>" placeholder="<?= $bilanModif; ?>"></textarea>
             </div>
           </div>
 
           <div class="form-group">
             <div class="col-lg-10 col-lg-offset-2">
+              <a href="<?= WEBROOT;?>"><button type="button" class="btn btn-default">Retour</button></a>
               <button type="submit" class="btn btn-primary">Enregistrer</button>
             </div>
           </div>
-
         </fieldset>
       </form>
     </div>
