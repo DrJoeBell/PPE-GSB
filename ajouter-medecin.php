@@ -168,14 +168,14 @@
           <div class="form-group">
             <label for="nom" class="col-lg-2 control-label">Nom</label>
             <div class="col-lg-10">
-              <input type="text" class="form-control" name="nom" id="nom" value="<?= $nom; ?>" placeholder="<?= $nom; ?>">
+              <input type="text" class="form-control" name="nom" id="nom" value="<?= $nomValue; ?>" placeholder="<?= $nom; ?>">
             </div>
           </div>
 
           <div class="form-group">
             <label for="prenom" class="col-lg-2 control-label">Prénom</label>
             <div class="col-lg-10">
-              <input type="text" class="form-control" name="prenom" id="prenom"  value="<?= $prenom; ?>" placeholder="<?= $prenom; ?>">
+              <input type="text" class="form-control" name="prenom" id="prenom"  value="<?= $prenomValue; ?>" placeholder="<?= $prenom; ?>">
             </div>
           </div>
 
@@ -201,35 +201,35 @@
           <div class="form-group">
             <label for="adresse" class="col-lg-2 control-label">Adresse</label>
             <div class="col-lg-10">
-              <input type="text" class="form-control" name="adresse" id="adresse" value="<?= $adresse; ?>" placeholder="<?= $adresse; ?>">
+              <input type="text" class="form-control" name="adresse" id="adresse" value="<?= $adresseValue; ?>" placeholder="<?= $adresse; ?>">
             </div>
           </div>
 
           <div class="form-group">
             <label for="ville" class="col-lg-2 control-label">Ville</label>
             <div class="col-lg-10">
-              <input type="text" class="form-control" name="ville" id="ville" value="<?= $ville; ?>" placeholder="<?= $ville; ?>">
+              <input type="text" class="form-control" name="ville" id="ville" value="<?= $villeValue; ?>" placeholder="<?= $ville; ?>">
             </div>
           </div>
 
           <div class="form-group">
             <label for="cp" class="col-lg-2 control-label">Code postal</label>
             <div class="col-lg-10">
-              <input type="text" class="form-control" name="cp" id="cp" value="<?= $cp; ?>" placeholder="<?= $cp; ?>">
+              <input type="text" class="form-control" name="cp" id="cp" value="<?= $cpValue; ?>" placeholder="<?= $cp; ?>">
             </div>
           </div>
 
           <div class="form-group">
             <label for="tel" class="col-lg-2 control-label">Téléphone</label>
             <div class="col-lg-10">
-              <input type="text" class="form-control" name="tel" id="tel" value="<?= $tel; ?>" placeholder="<?= $tel; ?>">
+              <input type="text" class="form-control" name="tel" id="tel" value="<?= $telValue; ?>" placeholder="<?= $tel; ?>">
             </div>
           </div>
 
           <div class="form-group">
             <label for="departement" class="col-lg-2 control-label">Département</label>
             <div class="col-lg-10">
-              <input type="text" class="form-control" name="departement" id="departement" value="<?= $departement; ?>" placeholder="<?= $departement; ?>">
+              <input type="text" class="form-control" name="departement" id="departement" value="<?= $departementValue; ?>" placeholder="<?= $departement; ?>">
             </div>
           </div>
 
