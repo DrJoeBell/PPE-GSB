@@ -7,7 +7,6 @@ if (isset($_GET['page']) && is_numeric($_GET['page'])){
       $page = $_GET['page'];
       $nbParPage = 4;
       $limit = ($page-1) * $nbParPage;
-      
       if (isset($_GET['q'])) {
           $search= substr_replace($_GET['q'], '%', 0, 0); //ajoute % au debut
           $search .= '%'; // ajoute % a la fin
@@ -38,7 +37,7 @@ if (isset($_GET['page']) && is_numeric($_GET['page'])){
             $result = $bdd->query($query);
             $medecins = $result->fetchAll();  
           if($result->rowCount()<1){
-            setFlash("info","Il n'y a plus de compte-rendu ensuite, vous avez été redirigé en première page.");
+            setFlash("info","Il n'y a plus de médecin(s) ensuite, vous avez été redirigé en première page.");
             header('Location: '.WEBROOT.'afficher_medecin.php?page=1');
             die();
           }
@@ -46,10 +45,10 @@ if (isset($_GET['page']) && is_numeric($_GET['page'])){
 
 }
 elseif (isset($_GET['id']) && is_numeric($_GET['id'])) {
-      $IdRapport = $bdd->quote($_GET['id']);
+      $IdMedecin = $bdd->quote($_GET['id']);
       $query = 
       "SELECT * FROM medecin
-        WHERE ID = ".$IdRapport;
+        WHERE ID = ".$IdMedecin;
       $result=$bdd->query($query);
       $medecins = $result->fetchAll();
 }
@@ -79,6 +78,7 @@ else{
             <img src="<?= WEBROOT ?>images/portrait-medecin.jpg" class="img-thumbnail">
             </div>
             <div class="col-md-10">
+              <a href="<?= WEBROOT.'ajouter-medecin.php?id='.$unMedecin['ID']; ?>" class="btn btn-sm btn-default pull-right"><span class="glyphicon glyphicon-edit"></span>&nbsp;Modifier</a>
               <ul>
                 <li><h3><?= $unMedecin['NOM'].' '.$unMedecin['PRENOM'] ?></h3></li>
                 <li><span class="glyphicon glyphicon-globe"></span>&nbsp;<?= $unMedecin['ADRESSE'] ?></li>

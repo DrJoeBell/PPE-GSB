@@ -26,7 +26,7 @@
         }
         else
         {
-            setFlash("error","Informations erronées");
+            setFlash("danger","Informations erronées");
         }
     }
 
