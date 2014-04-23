@@ -13,6 +13,15 @@
     $cp = "XXXXX";
     $tel = "xx xx xx xx xx";
     $departement = "xx";
+
+    $nomValue = "";
+    $prenomValue = "";
+    $adresseValue = "";
+    $villeValue = "";
+    $cpValue = "";
+    $telValue = "";
+    $departementValue = "";
+
     $ok = false;
 
 ////////////// //// /////////////////
@@ -42,14 +51,14 @@
     $resultMed = $bdd->query($query);
 
     foreach ($resultMed as $resultat) {
-      $nom = $resultat['NOM'];
-      $prenom = $resultat['PRENOM'];
-      $idSpe = $resultat['ID_POSSEDE'];
-      $adresse = $resultat['ADRESSE'];
-      $ville = $resultat['VILLE_MEDECIN'];
-      $cp = $resultat['CP_MEDECIN'];
-      $tel = $resultat['TEL'];
-      $departement = $resultat['DEPARTEMENT'];
+      $nomValue = $nom = $resultat['NOM'];
+      $prenomValue = $prenom = $resultat['PRENOM'];
+      $idSpe = $idSpeValue = $resultat['ID_POSSEDE'];
+      $adresse = $adresseValue = $resultat['ADRESSE'];
+      $ville = $villeValue = $resultat['VILLE_MEDECIN'];
+      $cp = $cpValue = $resultat['CP_MEDECIN'];
+      $tel = $telValue = $resultat['TEL'];
+      $departement = $departementValue = $resultat['DEPARTEMENT'];
     }
 
     // recuperation de la spe du medecin
@@ -61,11 +70,39 @@
   }
 
 
+///////////////////////////
+
+  // ajout d'un nouveau medecin
+  if (isset($_POST['nom']) && $_POST['nom'] != '' && isset($_GET['id']))
+  {
+    $id = $bdd->quote($_GET['id']);
+    $nom = $bdd->quote($_POST["nom"]);
+    $prenom = $bdd->quote($_POST["prenom"]);
+    $adresse = $bdd->quote($_POST["adresse"]);
+    $ville = $bdd->quote($_POST["ville"]);
+    $cp = $bdd->quote($_POST["cp"]);
+    $tel = $bdd->quote($_POST["tel"]);
+    $departement = $bdd->quote($_POST["departement"]);
+    $specialite = $bdd->quote($_POST["specialite"]);
+
+
+    // insertion des tuples
+    $update = "UPDATE medecin SET ID_POSSEDE=$specialite, NOM=$nom, PRENOM=$prenom, ADRESSE=$adresse, VILLE_MEDECIN=$ville, CP_MEDECIN=$cp, TEL=$tel, DEPARTEMENT=$departement WHERE id=$id;";
+   
+    $bdd->query($update);
+
+    setFlash("success","Modification(s) enregistrée(s) !");
+    header('Location:'.WEBROOT);
+      die();
+  }
+
+
+
 
 ///////////////////////////
 
   // ajout d'un nouveau medecin
-  if (isset($_POST['nom']) && $_POST['nom'] != '')
+  if (isset($_POST['nom']) && $_POST['nom'] != '' && !isset($_GET['id']))
   {
     $nom = $bdd->quote($_POST["nom"]);
     $prenom = $bdd->quote($_POST["prenom"]);
@@ -83,6 +120,27 @@
 
     $bdd->query($insertion);
     flashMessage("success","Enregistrement effectué !");
+
+    ////////////// RE - INIT /////////////////
+
+    $nom = "nom";
+    $prenom = "prénom";
+    $adresse = "adresse";
+    $ville = "ville";
+    $cp = "XXXXX";
+    $tel = "xx xx xx xx xx";
+    $departement = "xx";
+
+    $nomValue = "";
+    $prenomValue = "";
+    $adresseValue = "";
+    $villeValue = "";
+    $cpValue = "";
+    $telValue = "";
+    $departementValue = "";
+
+    $ok = false;
+
   }
 
 

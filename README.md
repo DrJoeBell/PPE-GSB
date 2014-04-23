@@ -11,6 +11,4 @@ Puis copier le fichier database_connexion.php du même dossier dans lib/ en le r
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-ajouter la date dans la navbar
-
 faire une doc utilisateur / technique du projet

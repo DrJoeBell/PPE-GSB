@@ -12,18 +12,17 @@
   include("lib/constants.php");
 
 /////////////// INIT /////////////////
-  $dateModif = "";
   $visiteurModif = "";
   $medecinModif = "";
   $motifModif = "";
   $bilanModif = "";
-  $date = date("d/m/Y");
+  $date = date("Y-m-d");
   $ok = false;
 
 /////////////////////////////////////
 
 
-  // modification du CR
+  // charge les données à modifier du CR
   if(isset($_GET['id'])){
     $id = $_GET['id'];
 
@@ -88,8 +87,36 @@
 
 ///////////////////////////
 
+  // UPDATE CR
+  if(isset($_POST["bilan"]) && $_POST["bilan"] != "" && isset($_GET['id']))
+  {
+    $date = $bdd->quote($_POST["date"]);
+    $visiteur = $_POST["visiteur"];
+    $medecin = $_POST["medecin"];
+    $motif = $_POST["motif"];
+    $bilan = $bdd->quote($_POST["bilan"]);
+    $id = $bdd->quote($_GET['id']);
+
+
+    // requete de UPDATE
+    $queryUpdate = "UPDATE rapport SET ID_REDIGER=$visiteur, ID_CONCERNE=$medecin, DATERAPPORT=$date, MOTIF=$motif, BILAN=$bilan WHERE id=$id;";
+
+    // exécution de la requête UPDATE
+    $bdd->query($queryUpdate);
+
+    setFlash("success", "Le compte rendu a été mis à jour !");
+    header('Location:'.WEBROOT);
+      die();
+  }
+
+
+
+
+
+///////////////////////////
+
   // ajout d'un CR
-  if(isset($_POST["bilan"]))
+  if(isset($_POST["bilan"]) && $_POST["bilan"] != "" && !isset($_GET['id']))
   {
     $date = $bdd->quote($_POST["date"]);
     $visiteur = $_POST["visiteur"];
@@ -103,6 +130,16 @@
 
     // exécution de la requête d'insertion
     $bdd->query($query_insert);
+
+    setFlash("success", "Le compte rendu a été enregistré !");
+
+    /////////////// RE - INIT /////////////////
+    $visiteurModif = "";
+    $medecinModif = "";
+    $motifModif = "";
+    $bilanModif = "";
+    $date = date("Y-m-d");
+    $ok = false;
   }
 
 ///////////////////////////////
@@ -138,7 +175,7 @@
           <div class="form-group">
             <label for="textArea" class="col-lg-2 control-label">Date</label>
             <div class="col-lg-10">
-              <input type="text" class="form-control" name="date" id="date" value="<?php echo $date; ?>" placeholder="<?php $date; ?>">
+              <input type="text" class="form-control" name="date" id="date" value="<?php echo $date; ?>" placeholder="<?php echo $date; ?>">
             </div>
           </div>
 
@@ -203,7 +240,7 @@
           <div class="form-group">
             <label for="textArea" class="col-lg-2 control-label">Bilan</label>
             <div class="col-lg-10">
-              <textarea class="form-control" rows="3" name="bilan" id="bilan" value="<?= $bilanModif; ?>" placeholder="<?= $bilanModif; ?>"></textarea>
+              <textarea class="form-control" rows="3" name="bilan" id="bilan" value="<?= $bilanModif; ?>" placeholder="<?= $bilanModif; ?>"><?= $bilanModif; ?></textarea>
             </div>
           </div>
 
