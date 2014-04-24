@@ -8,7 +8,7 @@ function flashMessage()
 }
 function setFlash($type="success", $message){
     $_SESSION['flash'] = 
-    "<div class='alert alert-$type alert-dismissable bounceInDown'>
+    "<div class='alert alert-$type alert-dismissable'>
         <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
         <div class='text-center'>$message</div>
         
