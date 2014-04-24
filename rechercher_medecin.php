@@ -58,7 +58,7 @@ else{
         <form method="POST" action="rechercher_medecin.php">
             <fieldset>
                 <label>Rechercher un médecin</label>
-                <input type="text" class="input-medium search-query" placeholder="Rechercher..." name="search"  size="80" autofocus>
+                <input id="autofocus" type="text" class="input-medium search-query" placeholder="Rechercher..." name="search"  size="80" autofocus="">
                 <br/>
                 <br/>
                 <button type="submit" class="btn">Recherche</button>

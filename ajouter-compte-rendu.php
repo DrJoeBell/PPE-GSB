@@ -1,5 +1,9 @@
 <?php 
   session_start();
+  if ((!isset($_SESSION["password"]) )&& (!isset($_SESSION["login"]))){
+    header ("Location: signin.php");
+    break;
+  }
 
   // correction date pour Uwamp
   if( ! ini_get('date.timezone') )

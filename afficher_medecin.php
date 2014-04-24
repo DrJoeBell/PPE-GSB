@@ -1,49 +1,53 @@
 <?php 
   session_start();
+  if ((!isset($_SESSION["password"]) )&& (!isset($_SESSION["login"]))){
+    header ("Location: signin.php");
+    break;
+  }
+
   include("lib/constants.php");
   include("lib/database_connexion.php");
   include("lib/function.php");
-if (isset($_GET['page']) && is_numeric($_GET['page'])){
-      $page = $_GET['page'];
-      $nbParPage = 4;
-      $limit = ($page-1) * $nbParPage;
-      if (isset($_GET['q'])) {
-          $search= substr_replace($_GET['q'], '%', 0, 0); //ajoute % au debut
-          $search .= '%'; // ajoute % a la fin
-          $search = $bdd->quote($search);
-          $query = 
-              "SELECT * FROM medecin
-                WHERE nom LIKE ".$search." OR prenom LIKE ".$search." ORDER BY nom DESC LIMIT $limit, $nbParPage";
-          $result=$bdd->query($query);
-          $medecins = $result->fetchAll();
-          if($result->rowCount()<1){
-            if ($page==1) {
-            setFlash("warning","Aucun résultats ne correspond à votre recherche.");
-            header('Location: '.WEBROOT.'afficher_medecin.php?page=1');
-            die();
-            }
-            setFlash("info","Il n'y a plus de compte-rendu ensuite pour votre recherche, vous avez été redirigé en première page.");
-            header('Location: '.WEBROOT.'afficher_medecin.php?page=1&q='.$_GET['q']);
-            die();
-          }
-          $title = "<small>Rechercher: '".$_GET['q']."'</small>";
-
-        }
-        else{
-            $query = 
+  if (isset($_GET['page']) && is_numeric($_GET['page'])){
+    $page = $_GET['page'];
+    $nbParPage = 4;
+    $limit = ($page-1) * $nbParPage;
+    if (isset($_GET['q'])) {
+        $search= substr_replace($_GET['q'], '%', 0, 0); //ajoute % au debut
+        $search .= '%'; // ajoute % a la fin
+        $search = $bdd->quote($search);
+        $query = 
             "SELECT * FROM medecin
-              ORDER BY nom DESC LIMIT $limit, $nbParPage";
-
-            $result = $bdd->query($query);
-            $medecins = $result->fetchAll();  
-          if($result->rowCount()<1){
-            setFlash("info","Il n'y a plus de médecin(s) ensuite, vous avez été redirigé en première page.");
-            header('Location: '.WEBROOT.'afficher_medecin.php?page=1');
-            die();
+              WHERE nom LIKE ".$search." OR prenom LIKE ".$search." ORDER BY nom DESC LIMIT $limit, $nbParPage";
+        $result=$bdd->query($query);
+        $medecins = $result->fetchAll();
+        if($result->rowCount()<1){
+          if ($page==1) {
+          setFlash("warning","Aucun résultats ne correspond à votre recherche.");
+          header('Location: '.WEBROOT.'afficher_medecin.php?page=1');
+          die();
           }
+          setFlash("info","Il n'y a plus de compte-rendu ensuite pour votre recherche, vous avez été redirigé en première page.");
+          header('Location: '.WEBROOT.'afficher_medecin.php?page=1&q='.$_GET['q']);
+          die();
         }
+        $title = "<small>Rechercher: '".$_GET['q']."'</small>";
 
-}
+      }
+      else{
+          $query = 
+          "SELECT * FROM medecin
+            ORDER BY nom DESC LIMIT $limit, $nbParPage";
+
+          $result = $bdd->query($query);
+          $medecins = $result->fetchAll();  
+        if($result->rowCount()<1){
+          setFlash("info","Il n'y a plus de médecin(s) ensuite, vous avez été redirigé en première page.");
+          header('Location: '.WEBROOT.'afficher_medecin.php?page=1');
+          die();
+        }
+      }
+  }
 elseif (isset($_GET['id']) && is_numeric($_GET['id'])) {
       $IdMedecin = $bdd->quote($_GET['id']);
       $query = 

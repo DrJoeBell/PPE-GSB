@@ -1,5 +1,10 @@
 <?php 
-session_start();
+  session_start();
+  if ((!isset($_SESSION["password"]) )&& (!isset($_SESSION["login"]))){
+    header ("Location: signin.php");
+    break;
+  }
+  
 include("lib/database_connexion.php");
 include("partials/header.php");
 include("lib/function.php");
