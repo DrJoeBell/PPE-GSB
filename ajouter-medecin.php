@@ -11,10 +11,10 @@
 
 ////////////// INIT /////////////////
 
-    $nom = "nom";
-    $prenom = "prénom";
-    $adresse = "adresse";
-    $ville = "ville";
+    $nom = "Nom";
+    $prenom = "Prénom";
+    $adresse = "Adresse";
+    $ville = "Ville";
     $cp = "XXXXX";
     $tel = "xx xx xx xx xx";
     $departement = "xx";

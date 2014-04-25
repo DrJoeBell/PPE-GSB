@@ -10,7 +10,7 @@ $directory = basename(WWW_ROOT);
 $url = explode($directory, $_SERVER['REQUEST_URI']);
 
 if (count($url) == 1) {
-	define('WEBRROT' . '/');
+	define('WEBROOT' . '/');
 }
 else{
 	define('WEBROOT', $url[0] . 'PPE-GSB/');
