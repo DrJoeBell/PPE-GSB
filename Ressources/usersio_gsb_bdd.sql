@@ -1,0 +1,201 @@
+-- phpMyAdmin SQL Dump
+-- version 4.0.2
+-- http://www.phpmyadmin.net
+--
+-- Client: localhost
+-- Généré le: Lun 28 Avril 2014 à 07:52
+-- Version du serveur: 5.6.11-log
+-- Version de PHP: 5.4.15
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Base de données: `usersio_gsb`
+--
+CREATE DATABASE IF NOT EXISTS `usersio_gsb` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `usersio_gsb`;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `medecin`
+--
+
+CREATE TABLE IF NOT EXISTS `medecin` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_POSSEDE` int(11) NOT NULL,
+  `NOM` varchar(255) DEFAULT NULL,
+  `PRENOM` varchar(255) DEFAULT NULL,
+  `ADRESSE` varchar(255) DEFAULT NULL,
+  `VILLE_MEDECIN` varchar(255) NOT NULL,
+  `CP_MEDECIN` int(5) NOT NULL,
+  `TEL` varchar(32) DEFAULT NULL,
+  `DEPARTEMENT` int(2) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK_MEDECIN_SPECIALITE` (`ID_POSSEDE`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+
+--
+-- Contenu de la table `medecin`
+--
+
+INSERT INTO `medecin` (`ID`, `ID_POSSEDE`, `NOM`, `PRENOM`, `ADRESSE`, `VILLE_MEDECIN`, `CP_MEDECIN`, `TEL`, `DEPARTEMENT`) VALUES
+(1, 1, 'Garcion', 'Cedric', '69 Rue de la Juiverie', 'Nantes', 44100, '02 12 45 78 36', 44),
+(2, 2, 'Bertin', 'Élizabeth', '52 Rue de l''Abreuvoir', ' Niort', 79000, '02 74 85 96 32', 44),
+(3, 3, 'Bousquet', 'Christine', '36 Rue des Cadeniers', 'Paris', 75000, '02 52 63 41 85', 35),
+(4, 4, 'Canévet', 'Paul', '75 Bd de Doulon', 'Alençon', 61000, '02 33 54 96 87', 35),
+(5, 5, 'Catoire', 'Georges', '26 Rue de l''Échappée', 'Dijon', 21000, '02 85 52 41 45', 79),
+(6, 6, 'Pesta', 'Richard', '42 Rue des Ferblantiers', 'Lille', 59000, '02 52 45 55 21', 79),
+(7, 2, 'Tim', 'Vincent', '125 Rue de la Monnaie', 'Rennes', 35000, '02 02 25 19 24', 20),
+(8, 4, 'Korb', 'Owen', '53 Place des Garennes', 'Marseille', 13000, '02 54 52 51 53', 44),
+(9, 6, 'Forbes-Grifon', 'Michel', '83 Avenue des Amours', 'Aix-en-Provence', 13000, '02 98 56 18 24', 44),
+(10, 2, 'Linet', 'Teddy', '65 Places des Grands Coeurs', 'Nantes', 44120, '02 36 25 14 98', 35),
+(11, 3, 'Chaudet', 'Ramon', '2 rue des Bois Doré', 'Nantes', 44000, '01 02 03 04 05', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `motif`
+--
+
+CREATE TABLE IF NOT EXISTS `motif` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `libelle` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+
+--
+-- Contenu de la table `motif`
+--
+
+INSERT INTO `motif` (`id`, `libelle`) VALUES
+(1, 'Visite Annuelle'),
+(2, 'Presentation d''un nouveau medicament'),
+(3, 'Sollicitation du medecin'),
+(4, 'Visite bi-mensuelle');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rapport`
+--
+
+CREATE TABLE IF NOT EXISTS `rapport` (
+  `ID` int(32) NOT NULL AUTO_INCREMENT,
+  `ID_REDIGER` int(32) NOT NULL,
+  `ID_CONCERNE` int(32) NOT NULL,
+  `DATERAPPORT` date NOT NULL,
+  `MOTIF` int(255) DEFAULT NULL,
+  `BILAN` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK_RAPPORT_MEDECIN` (`ID_CONCERNE`),
+  KEY `FK_RAPPORT_VISITEUR` (`ID_REDIGER`),
+  KEY `FK_RAPPORT_MOTIF` (`MOTIF`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=23 ;
+
+--
+-- Contenu de la table `rapport`
+--
+
+INSERT INTO `rapport` (`ID`, `ID_REDIGER`, `ID_CONCERNE`, `DATERAPPORT`, `MOTIF`, `BILAN`) VALUES
+(12, 5, 2, '2014-04-24', 2, 'Le médecin visité a choisi de nous recontacter ultérieurement pour nous faire part de sa décision.'),
+(14, 4, 4, '2014-04-28', 4, 'Retour après vers le médecin après 15 jours pour vérifier sa satisfaction, jusqu''à présent tout ce passe bien.'),
+(15, 1, 1, '2014-02-24', 2, 'Nous avons rencontré le Docteur Garcion afin de lui proposer notre nouveau médicament, Médiator.\r\n'),
+(16, 3, 6, '2014-03-11', 3, 'Nous avons sollicité le Dr. Pesta afin d''avoir son accord pour diffuser notre nouveau médicament à ses patients, s''ils rentrent dans les critères.'),
+(17, 2, 8, '2013-11-28', 1, 'Visite annuelle avec le Docteur Korb pour renouveler notre partenariat.'),
+(18, 3, 11, '2014-05-20', 2, 'Présentation d''une heure du Durapirox avec le Docteur Chaudet.\r\nIl semble intéressé et reviendra vers nous sous peu.'),
+(19, 6, 5, '2014-06-18', 3, 'Le Docteur Catoire nous a contacter afin de connaître nos nouveaux produits et voir lesquels pourrait l''intéresser.'),
+(20, 5, 9, '2013-07-28', 4, 'L''étude clinique médicamenteuse se passe correctement, aucunes réactions allergènes constater chez les patients du Dr. Forbes-Griffon'),
+(21, 1, 10, '2013-08-18', 1, 'Cessation de toute activité avec le Dr. Linet, suite à son changement de cabinet.'),
+(22, 3, 3, '2013-09-26', 3, 'Le Dr. Bousquet souhaitait nous informer que des réactions inattendues sont survenus chez certains patients et que par conséquent il souhaitait arrêter la diffusion de notre médicament dans son cabinet, malgré le contrat précédemment signé.');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `specialite`
+--
+
+CREATE TABLE IF NOT EXISTS `specialite` (
+  `ID` int(32) NOT NULL AUTO_INCREMENT,
+  `LIBELLE` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=9 ;
+
+--
+-- Contenu de la table `specialite`
+--
+
+INSERT INTO `specialite` (`ID`, `LIBELLE`) VALUES
+(1, 'Neurochirurgie'),
+(2, 'Othopédie'),
+(3, 'Généraliste'),
+(4, 'Pédo-psychatrie'),
+(5, 'Cancérologie'),
+(6, 'Pneumologie'),
+(7, 'Médecine du sport'),
+(8, 'Cardiologie');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `visiteur`
+--
+
+CREATE TABLE IF NOT EXISTS `visiteur` (
+  `ID` int(32) NOT NULL AUTO_INCREMENT,
+  `NOM` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
+  `PRENOM` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
+  `LOGIN` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `PASSWORD` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `ADRESSE` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
+  `VILLE` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
+  `CP` int(11) NOT NULL,
+  `MAIL` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `DATEEMBAUCHE` date NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=11 ;
+
+--
+-- Contenu de la table `visiteur`
+--
+
+INSERT INTO `visiteur` (`ID`, `NOM`, `PRENOM`, `LOGIN`, `PASSWORD`, `ADRESSE`, `VILLE`, `CP`, `MAIL`, `DATEEMBAUCHE`) VALUES
+(1, 'Martin', 'Ayden', 'martin1', '202cb962ac59075b964b07152d234b70', '18 Bd des Anglais', 'Nantes', 44000, 'toto@toto.fr', '0000-00-00'),
+(2, 'Dubois', 'Bradley', 'martin2', '202cb962ac59075b964b07152d234b70', '152 Bd des Américains', 'Nantes', 44000, 'toto@toto.fr', '0000-00-00'),
+(3, 'Garnier', 'Lorenzo', 'martin3', '202cb962ac59075b964b07152d234b70', '92 Avenue des Champs', 'Fleury les Aubrais', 45400, 'toto@toto.fr', '0000-00-00'),
+(4, 'Lopez', 'Jenny', 'martin4', '202cb962ac59075b964b07152d234b70', '32 Ruelle des Illuminés', 'Metz', 57000, 'toto@toto.fr', '0000-00-00'),
+(5, 'Blanc', 'Alysson', 'martin5', '202cb962ac59075b964b07152d234b70', '93 Rue de la Soif', 'Rennes', 35000, 'blanc@blanc.com', '0000-00-00'),
+(6, 'Girard', 'Alistair', 'martin6', '202cb962ac59075b964b07152d234b70', '52 Avenue de l''étrange', 'Niort', 79000, '', '0000-00-00'),
+(7, 'Pasco', 'Mathieu', 'mathieu', '202cb962ac59075b964b07152d234b70', '11, rue du gaie jean-louis', 'Rennes', 35700, 'tito@plot.fr', '0000-00-00'),
+(8, 'Plissonneau', 'Valentin', 'val', '202cb962ac59075b964b07152d234b70', '15, rue de la joie', 'Nantes', 44000, 'moi@moi.moi', '0000-00-00'),
+(9, 'Richard', 'Clément', 'clement', '202cb962ac59075b964b07152d234b70', '42, rue de l''indice', 'New-York', 99011, 'tit@titi.fr', '0000-00-00'),
+(10, 'prof', 'prof', 'prof', 'd450c5dbcc10db0749277efc32f15f9f', 'Bd du Massacre', 'Nantes', 44100, 'sio.carcouet@gmail.com', '0000-00-00');
+
+--
+-- Contraintes pour les tables exportées
+--
+
+--
+-- Contraintes pour la table `medecin`
+--
+ALTER TABLE `medecin`
+  ADD CONSTRAINT `medecin_ibfk_1` FOREIGN KEY (`ID_POSSEDE`) REFERENCES `specialite` (`ID`);
+
+--
+-- Contraintes pour la table `rapport`
+--
+ALTER TABLE `rapport`
+  ADD CONSTRAINT `rapport_ibfk_1` FOREIGN KEY (`ID_CONCERNE`) REFERENCES `medecin` (`ID`),
+  ADD CONSTRAINT `rapport_ibfk_2` FOREIGN KEY (`ID_REDIGER`) REFERENCES `visiteur` (`ID`),
+  ADD CONSTRAINT `rapport_ibfk_3` FOREIGN KEY (`MOTIF`) REFERENCES `motif` (`id`);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
