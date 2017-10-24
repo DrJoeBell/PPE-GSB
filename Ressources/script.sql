@@ -55,6 +55,7 @@ INSERT INTO `medecin` (`ID`, `ID_POSSEDE`, `NOM`, `PRENOM`, `ADRESSE`, `VILLE_ME
 (6, 6, 'Pesta', 'Richard', '42 Rue des Ferblantiers', 'Lille', 59000, '02 52 45 55 21', '79'),
 (7, 2, 'Tim', 'Vincent', '125 Rue de la Monnaie', 'Rennes', 35000, '02 02 25 19 24', '20'),
 (8, 4, 'Korb', 'Owen', '53 Place des Garennes', 'Marseille', 13000, '02 54 52 51 53', '44'),
+(8, 4, 'Joe', 'Bell', '53 Place des pommes', 'Angers', 13000, '02 54 52 58 53', '49'),
 (9, 6, 'Forbes-Grifon', 'Michel', '83 Avenue des Amours', 'Aix-en-Provence', 13000, '02 98 56 18 24', '44');
 
 -- --------------------------------------------------------
